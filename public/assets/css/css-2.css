@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'Mada';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Mada Regular'), local('Mada-Regular'), url(https://fonts.gstatic.com/s/mada/v8/7Auwp_0qnzeSfTLGKA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Mada';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local('Mada Medium'), local('Mada-Medium'), url(https://fonts.gstatic.com/s/mada/v8/7Au_p_0qnzeSdcHlOCX2yg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Mada';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Mada SemiBold'), local('Mada-SemiBold'), url(https://fonts.gstatic.com/s/mada/v8/7Au_p_0qnzeSde3iOCX2yg.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Mada';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Mada Bold'), local('Mada-Bold'), url(https://fonts.gstatic.com/s/mada/v8/7Au_p_0qnzeSdYnjOCX2yg.ttf) format('truetype');
+}
