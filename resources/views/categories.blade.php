@@ -30,7 +30,7 @@
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
 								<th>Created date</th>
-								<th class="text-right">Actions</th>
+								<th class="text-center action-btn">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,7 +44,7 @@
 								
 								<td>{{date_format(date_create($category->created_at),"d M,Y")}}</td>
 
-								<td class="text-right">
+								<td class="text-center">
 									<div class="actions">
 										<a data-id="{{$category->id}}" data-name="{{$category->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit

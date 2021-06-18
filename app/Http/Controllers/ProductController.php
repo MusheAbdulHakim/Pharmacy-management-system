@@ -61,7 +61,7 @@ class ProductController extends Controller
         $title = "outstocked Products";
         $products = Purchase::where('quantity', '<=', 0)->get();
         $product = Purchase::where('quantity', '<=', 0)->first();
-        auth()->user()->notify(new StockAlert($product));
+        // auth()->user()->notify(new StockAlert($product));
         
         return view('outstock',compact(
             'title','products',

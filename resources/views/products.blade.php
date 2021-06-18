@@ -26,7 +26,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="datatable table table-hover table-center mb-0">
+					<table id="datatable-export" class="table table-hover table-center mb-0">
 						<thead>
 							<tr>
 								<th>Product Name</th>
@@ -35,7 +35,7 @@
 								<th>Quantity</th>
 								<th>Discount</th>
 								<th>Expiry Date</th>
-								<th>Action</th>
+								<th class="action-btn">Action</th>
 							</tr>
 						</thead>
 						<tbody>

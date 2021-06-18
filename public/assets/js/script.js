@@ -229,6 +229,15 @@ Version      : 1.3
 		}
 	});
 
-	
+	$(document).ready(function(){
+		// delete confirmation modal
+		$('.deletebtn').on('click',function (){
+			$('#deleteConfirmModal').modal('show');
+			var id = $(this).data('id');
+			console.log(id);
+			$('#delete_id').val(id);
+		});
+		
+	});
 		
 })(jQuery);

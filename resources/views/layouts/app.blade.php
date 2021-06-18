@@ -5,36 +5,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
         <title>{{ucfirst(AppSettings::get('app_name', 'App'))}} - {{ucfirst($title ?? '')}}</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
+		
 		<!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/'.AppSettings::get('favicon'))}}">
-		
+		<link rel="shortcut icon" type="image/x-icon" href="{{asset('storage/'.AppSettings::get('favicon'))}}">
+
 		<!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
-		
+		<link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
+
 		<!-- Fontawesome CSS -->
-        <link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
-		
+		<link rel="stylesheet" href="{{asset('assets/css/font-awesome.min.css')}}">
 		<!-- Fontawesome CSS -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/fontawesome/css/fontawesome.min.css')}}">
 		<link rel="stylesheet" href="{{asset('assets/plugins/fontawesome/css/all.min.css')}}">
 		
 		<!-- Feathericon CSS -->
-        <link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
-		
+		<link rel="stylesheet" href="{{asset('assets/css/feathericon.min.css')}}">
+
 		<!-- Snackbar CSS -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/snackbar/snackbar.min.css')}}">
-
-		<!-- Snackbar CSS -->
+		<!-- Toastr CSS -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.css')}}">
-
-		<!-- Main CSS -->
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-
 		<!-- Datatables css -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/DataTables/datatables.css')}}">
 
+		<!-- Main CSS -->
+		<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
 		<!-- Custom css -->
 		<link rel="stylesheet" href="{{asset('css/app.css')}}">
+
 
 		<!-- page css -->
 		@stack('page-css')
@@ -89,11 +88,11 @@
     </body>
 	<!-- jQuery -->
 	<script src="{{asset('assets/js/jquery-3.2.1.min.js')}}"></script>
-		
+			
 	<!-- Bootstrap Core JS -->
 	<script src="{{asset('assets/js/popper.min.js')}}"></script>
 	<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-	
+
 	<!-- Slimscroll JS -->
 	<script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 
@@ -102,15 +101,13 @@
 
 	<!-- Toastr Js -->
 	<script src="{{asset('assets/plugins/toastr/toastr.min.js')}}"></script>
-	<!-- Datatables js -->
-	<script src="{{asset('assets/plugins/DataTables/datatables.min.js')}}"></script>
+	
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/script.js')}}"></script>
-	<script src="{{asset('assets/js/custom.js')}}"></script>
 	<script src="{{asset('js/app.js')}}"></script>
-		
+	<script src="{{asset('assets/js/datatables-customizer.js')}}"></script>
 	<script>
-        @if(Session::has('message'))
+		@if(Session::has('message'))
 			var type = "{{ Session::get('alert-type', 'info') }}";
 			switch(type){
 				case 'info':
@@ -120,7 +117,7 @@
 						backgroundColor: '#2196f3'
 					});
 					break;
-
+	
 				case 'warning':
 					Snackbar.show({
 						text: "{{ Session::get('message') }}",
@@ -129,7 +126,7 @@
 						backgroundColor: '#e2a03f'
 					});
 					break;
-
+	
 				case 'success':
 					Snackbar.show({
 						text: "{{ Session::get('message') }}",
@@ -138,7 +135,7 @@
 						backgroundColor: '#8dbf42'
 					});
 					break;
-
+	
 				case 'danger':
 					Snackbar.show({
 						text: "{{ Session::get('message') }}",
@@ -149,9 +146,9 @@
 					break;
 			}
 		@endif
-    </script> 
-	
-	
+	</script>
+	<!-- Datatables js -->
+	<script src="{{asset('assets/plugins/DataTables/datatables.min.js')}}"></script>
 	<!-- page js -->
 	@stack('page-js')
 

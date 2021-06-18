@@ -7,6 +7,7 @@ use App\Models\Sales;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use App\Events\PurchaseOutStock;
 use App\Notifications\StockAlert;
 
 class SalesController extends Controller
@@ -68,10 +69,12 @@ class SalesController extends Controller
                 'alert-type'=>'success',
             );
         }
+        
         if($new_quantity <=3 && $new_quantity !=0){
             // send notification 
             $product = Purchase::where('quantity', '<=', 3)->first();
             auth()->user()->notify(new StockAlert($product));
+            event(new PurchaseOutStock());
             // end of notification 
             $notification = array(
                 'message'=>"Product is running out of stock!!!",

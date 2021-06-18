@@ -25,13 +25,13 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="datatable table table-hover table-center mb-0">
+					<table id="datatable-export" class="table table-hover table-center mb-0">
 						<thead>
 							<tr>
 								<th>Medicine Name</th>
 								<th>Total Price</th>
 								<th>Date</th>
-								<th>Action</th>
+								<th class="action-btn">Action</th>
 							</tr>
 						</thead>
 						<tbody>
