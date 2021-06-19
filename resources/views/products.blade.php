@@ -22,7 +22,7 @@
 <div class="row">
 	<div class="col-md-12">
 	
-		<!-- Recent Orders -->
+		<!-- Products -->
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
@@ -78,7 +78,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- /Recent Orders -->
+		<!-- /Products -->
 		
 	</div>
 </div>

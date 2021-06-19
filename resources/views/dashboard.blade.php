@@ -108,7 +108,7 @@
 					<h4 class="card-title">Revenue</h4>
 				</div>
 				<div class="card-body">
-						{!! $chartjs->render() !!}
+						
 				</div>
 			</div>
 			<!-- /Sales Chart -->
@@ -140,7 +140,7 @@
 			<!-- Latest Customers -->
 			<div class="card card-table">
 				<div class="card-header">
-					<h4 class="card-title">Latest Customers</h4>
+					<h4 class="card-title text-center">Latest Sales</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">

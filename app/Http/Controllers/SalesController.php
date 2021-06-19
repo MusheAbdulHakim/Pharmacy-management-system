@@ -73,8 +73,7 @@ class SalesController extends Controller
         if($new_quantity <=3 && $new_quantity !=0){
             // send notification 
             $product = Purchase::where('quantity', '<=', 3)->first();
-            auth()->user()->notify(new StockAlert($product));
-            event(new PurchaseOutStock());
+            event(new PurchaseOutStock($product));
             // end of notification 
             $notification = array(
                 'message'=>"Product is running out of stock!!!",

@@ -3,8 +3,9 @@
 namespace App\Listeners;
 
 use App\Events\PurchaseOutStock;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\StockAlert;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NotifyStockAlert
 {
@@ -26,6 +27,6 @@ class NotifyStockAlert
      */
     public function handle(PurchaseOutStock $event)
     {
-        //
+        auth()->user()->notify(new StockAlert($event->data));
     }
 }

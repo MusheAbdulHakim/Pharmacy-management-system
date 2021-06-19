@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\ProductController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -75,6 +77,18 @@ Route::group(['middleware'=>['auth']],function (){
     Route::post('sales',[SalesController::class,'store']);
     Route::delete('sales',[SalesController::class,'destroy']);
 
+    Route::get('permissions',[PermissionController::class,'index'])->name('permissions');
+    Route::post('permissions',[PermissionController::class,'store']);
+    Route::put('permissions',[PermissionController::class,'update']);
+    Route::delete('permissions',[PermissionController::class,'destroy']);
+
+    Route::get('roles',[RoleController::class,'index'])->name('roles');
+    Route::post('roles',[RoleController::class,'store']);
+    Route::put('roles',[RoleController::class,'update']);
+    Route::delete('roles',[RoleController::class,'destroy']);
+
+    Route::get('users',[UserController::class,'index'])->name('users');
+    Route::delete('users',[UserController::class,'destroy']);
 
     Route::get('profile',[UserController::class,'profile'])->name('profile');
     Route::post('profile',[UserController::class,'updateProfile']);

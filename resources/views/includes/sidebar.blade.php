@@ -43,14 +43,22 @@
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						<li><a href="#">Daily Reports</a></li>
-						<li><a href="#">Monthly Reports</a></li>
-						<li><a href="#">Annual Reports</a></li>
+						<li><a href="#">Reports</a></li>
 					</ul>
 				</li>
-				<li class="menu-title"> 
-					<span>Pages</span>
+
+				<li class="submenu">
+					<a href="#"><i class="fe fe-lock"></i> <span> Access Control</span> <span class="menu-arrow"></span></a>
+					<ul style="display: none;">
+						<li><a class="{{ Request::routeIs('permissions') ? 'active' : '' }}" href="{{route('permissions')}}">Permissions</a></li>
+						<li><a class="{{ Request::routeIs('roles') ? 'active' : '' }}" href="{{route('roles')}}">Roles</a></li>
+					</ul>
 				</li>
+
+				<li class="{{ Request::routeIs('users') ? 'active' : '' }}"> 
+					<a href="{{route('users')}}"><i class="fe fe-users"></i> <span>Users</span></a>
+				</li>
+				
 				<li class="{{ Request::routeIs('profile') ? 'active' : '' }}"> 
 					<a href="{{route('profile')}}"><i class="fe fe-user-plus"></i> <span>Profile</span></a>
 				</li>

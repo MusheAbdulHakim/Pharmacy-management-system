@@ -238,6 +238,7 @@ Version      : 1.3
 			$('#delete_id').val(id);
 		});
 		
+		
 	});
 		
 })(jQuery);

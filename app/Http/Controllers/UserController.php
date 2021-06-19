@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,43 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $title = "users";
+        $users  = User::get();
+        return view('users',compact(
+            'title','users'
+        ));
+    }
+
+    
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request){
+        $this->validate($request,[
+            'name'=>'required|max:100',
+            'email'=>'required|email',
+            'password'=>'required|confirmed|max:200',
+            'avatar'=>'file|image|mimes:jpg,jpeg,gif,png',
+        ]);
+        $imageName = null;
+        if($request->hasFile('avatar')){
+            $imageName = time().'.'.$request->avatar->extension();
+            $request->avatar->move(public_path('storage/users'), $imageName);
+        }
+        User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'avatar'=>$imageName
+        ]);
+        $notification =array(
+            'message'=>"User has been added!!!",
+            'alert-type'=>'success'
+        );
+        return back()->with($notification);
     }
 
     /**
@@ -31,7 +68,7 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * update resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -117,11 +154,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $user = User::find($request->id);
+        $user->delete();
+        $notification=array(
+            'message'=>"User has been deleted",
+            'alert-type'=>'success',
+        );
+        return back()->with($notification);
     }
 }

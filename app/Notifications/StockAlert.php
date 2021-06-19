@@ -13,16 +13,17 @@ class StockAlert extends Notification
 {
     use Queueable;
 
-    public $product;
+    private $data;
+
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Purchase $product)
+    public function __construct($data)
     {
-        $this->product = $product;
+        $this->data = $data;
     }
 
     /**
@@ -44,11 +45,11 @@ class StockAlert extends Notification
      */
     public function toMail($notifiable)
     {
-        $url = url(route('edit-purchase',$this->product->id));
+        $url = url(route('edit-purchase',$this->data->id));
         return (new MailMessage)
                     ->greeting('Hello!')
                     ->line('The Product below is running out of stock.')
-                    ->line("Product's name is ".$this->product->name ."is only ".$this->product->quantity."left in quantity")
+                    ->line("Product's name is ".$this->data->name ."is only ".$this->data->quantity."left in quantity")
                     ->line("Please update the product's quantity or make a new purchase.")
                     ->action('View Product', $url)
                     ->line('Thank you!');
@@ -63,9 +64,9 @@ class StockAlert extends Notification
     public function toArray($notifiable)
     {
         return [
-            'product_name'=>$this->product->name,
-            'quantity'=>$this->product->quantity,
-            'image'=>$this->product->image,
+            'product_name'=>$this->data->name,
+            'quantity'=>$this->data->quantity,
+            'image'=>$this->data->image,
         ];
     }
 
@@ -79,8 +80,8 @@ class StockAlert extends Notification
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'product_name'=>$this->product->name,
-            'quantity'=>$this->product->quantity,
+            'product_name'=>$this->data->name,
+            'quantity'=>$this->data->quantity,
         ]);
     }
 }

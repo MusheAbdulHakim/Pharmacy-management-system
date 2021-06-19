@@ -6,14 +6,14 @@
 
 @push('page-header')
 <div class="col-sm-7 col-auto">
-	<h3 class="page-title">Categories</h3>
+	<h3 class="page-title">User</h3>
 	<ul class="breadcrumb">
 		<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-		<li class="breadcrumb-item active">Categories</li>
+		<li class="breadcrumb-item active">Users</li>
 	</ul>
 </div>
 <div class="col-sm-5 col">
-	<a href="#add_categories" data-toggle="modal" class="btn btn-primary float-right mt-2">Add Category</a>
+	<a href="#add_user" data-toggle="modal" class="btn btn-primary float-right mt-2">Add User</a>
 </div>
 
 @endpush
@@ -29,27 +29,36 @@
 						<thead>
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
+								<th>Email</th>
 								<th>Created date</th>
 								<th class="text-center action-btn">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($categories as $category)
+							@foreach ($users as $user)
 							<tr>								
 								<td>
-									<h2 class="table-avatar">	
-										{{$category->name}}
+									<h2 class="table-avatar">
+										@if(!empty($user->avatar))
+										<span class="avatar avatar-sm mr-2">
+											<img class="avatar-img" src="{{asset('storage/users/'.$user->avatar)}}" alt="product image">
+										</span>
+										@endif	
+										{{$user->name}}
 									</h2>
 								</td>
+								<td>
+									{{$user->email}}
+								</td>
 								
-								<td>{{date_format(date_create($category->created_at),"d M,Y")}}</td>
+								<td>{{date_format(date_create($user->created_at),"d M,Y")}}</td>
 
 								<td class="text-center">
 									<div class="actions">
-										<a data-id="{{$category->id}}" data-name="{{$category->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
+										<a data-id="{{$user->id}}" data-name="{{$user->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
-										<a data-id="{{$category->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
+										<a data-id="{{$user->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
 											<i class="fe fe-trash"></i> Delete
 										</a>
 									</div>
@@ -65,23 +74,51 @@
 </div>
 
 <!-- Add Modal -->
-<div class="modal fade" id="add_categories" aria-hidden="true" role="dialog">
+<div class="modal fade" id="add_user" aria-hidden="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Add Category</h5>
+				<h5 class="modal-title">Add User</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="POST" action="{{route('categories')}}">
+				<form method="POST" enctype="multipart/form-data" action="{{route('users')}}">
 					@csrf
 					<div class="row form-row">
 						<div class="col-12">
 							<div class="form-group">
-								<label>Category</label>
-								<input type="text" name="name" class="form-control">
+								<label>Full Name</label>
+								<input type="text" name="name" class="form-control" placeholder="John Doe">
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" name="email" class="form-control" id="email">
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label for="avatar">User Picture</label>
+								<input type="file" name="avatar" id="avatar">
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label>Password</label>
+										<input type="password" name="password" class="form-control">
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label>Confirm Password</label>
+										<input type="password" name="password_confirmation" class="form-control">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -94,7 +131,7 @@
 <!-- /ADD Modal -->
 
 <!-- Edit Details Modal -->
-<div class="modal fade" id="edit_category" aria-hidden="true" role="dialog">
+<div class="modal fade" id="edit_user" aria-hidden="true" role="dialog">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -126,7 +163,7 @@
 <!-- /Edit Details Modal -->
 
 <!-- Delete Modal -->
-<x-modals.delete :route="'categories'" :title="'Category'" />
+<x-modals.delete :route="'users'" :title="'User'" />
 <!-- /Delete Modal -->
 @endsection
 
@@ -135,9 +172,7 @@
 	<script>
 		$(document).ready(function() {
 			$('.editbtn').on('click',function (){
-				event.preventDefault();
-				jQuery.noConflict();
-				$('#edit_category').modal('show');
+				$('#edit_user').modal('show');
 				var id = $(this).data('id');
 				var name = $(this).data('name');
 				$('#edit_id').val(id);
