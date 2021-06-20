@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\CategoryController;
@@ -75,6 +76,7 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::get('sales',[SalesController::class,'index'])->name('sales');
     Route::post('sales',[SalesController::class,'store']);
+    Route::put('sales',[SalesController::class,'update']);
     Route::delete('sales',[SalesController::class,'destroy']);
 
     Route::get('permissions',[PermissionController::class,'index'])->name('permissions');
@@ -100,6 +102,8 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::get('notification',[NotificationController::class,'markAsRead'])->name('mark-as-read');
     Route::get('notification-read',[NotificationController::class,'read'])->name('read');
+
+    Route::get('reports',[ReportController::class,'index'])->name('reports');
 
 });
 

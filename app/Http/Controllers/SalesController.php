@@ -110,7 +110,58 @@ class SalesController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        $this->validate($request,[
+            'product'=>'required',
+            'quantity'=>'required|integer'
+        ]);
+        $sold_product = Product::find($request->product);
+        
+        /**update quantity of
+            sold item from
+         purchases
+        **/
+        $purchased_item = Purchase::find($sold_product->purchase->id);
+        $new_quantity = ($purchased_item->quantity) - ($request->quantity);
+        if ($new_quantity > 0){
+
+            $purchased_item->update([
+                'quantity'=>$new_quantity,
+            ]);
+
+            /**
+             * calcualting item's total price
+            **/
+            $total_price = ($request->quantity) * ($sold_product->price);
+            Sales::create([
+                'product_id'=>$request->product,
+                'quantity'=>$request->quantity,
+                'total_price'=>$total_price,
+            ]);
+
+            $notification = array(
+                'message'=>"Product has been sold",
+                'alert-type'=>'success',
+            );
+        }
+        
+        elseif($new_quantity <=3 && $new_quantity !=0){
+            // send notification 
+            $product = Purchase::where('quantity', '<=', 3)->first();
+            event(new PurchaseOutStock($product));
+            // end of notification 
+            $notification = array(
+                'message'=>"Product is running out of stock!!!",
+                'alert-type'=>'danger'
+            );
+            
+        }
+        else{
+            $notification = array(
+                'message'=>"Please check purchase product quantity",
+                'alert-type'=>'info',
+            );
+            return back()->with($notification);
+        }
     }
 
     /**

@@ -25,7 +25,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="datatable table table-striped table-bordered table-hover table-center mb-0">
+					<table id="datatable-export" class=" table table-striped table-bordered table-hover table-center mb-0">
 						<thead>
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
