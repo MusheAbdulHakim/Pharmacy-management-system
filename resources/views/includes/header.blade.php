@@ -83,7 +83,7 @@
 					</div>
 				</div>
 				<a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
-				<a class="dropdown-item" href="{{route('settings')}}">Settings</a>
+				@can('view-settings')<a class="dropdown-item" href="{{route('settings')}}">Settings</a>@endcan
 				<a class="dropdown-item" href="{{route('logout')}}">Logout</a>
 			</div>
 		</li>

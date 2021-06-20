@@ -5,7 +5,7 @@
 
 @push('page-header')
 <div class="col-sm-12">
-	<h3 class="page-title">Welcome Admin!</h3>
+	<h3 class="page-title">Welcome {{auth()->user()->name}}!</h3>
 	<ul class="breadcrumb">
 		<li class="breadcrumb-item active">Dashboard</li>
 	</ul>
@@ -102,16 +102,39 @@
 	<div class="row">
 		<div class="col-md-12 col-lg-6">
 		
-			<!-- Sales Chart -->
-			<div class="card card-chart">
+			<div class="card card-table">
 				<div class="card-header">
-					<h4 class="card-title">Revenue</h4>
+					<h4 class="card-title ">Latest Sales</h4>
 				</div>
 				<div class="card-body">
-						
+					<div class="table-responsive">
+						<table class="table table-hover table-center mb-0">
+							<thead>
+								<tr>
+									<th>Medicine</th>
+									<th>Quantity</th>
+									<th>Total Price</th>
+									<th>Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach ($latest_sales as $sale)
+								<tr>
+									<td>{{$sale->product->purchase->name}}</td>
+									<td>{{$sale->quantity}}</td>
+									<td>
+										{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
+									</td>
+									<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
+									
+								</tr>
+								@endforeach
+																
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
-			<!-- /Sales Chart -->
 			
 		</div>
 
@@ -138,37 +161,7 @@
 		<div class="col-md-12">
 		
 			<!-- Latest Customers -->
-			<div class="card card-table">
-				<div class="card-header">
-					<h4 class="card-title text-center">Latest Sales</h4>
-				</div>
-				<div class="card-body">
-					<div class="table-responsive">
-						<table class="table table-hover table-center mb-0">
-							<thead>
-								<tr>
-									<th>Medicine Name</th>
-									<th>Total Price</th>
-									<th>Date</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach ($latest_sales as $sale)
-								<tr>
-									<td>{{$sale->product->purchase->name}}</td>
-									<td>
-										{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
-									</td>
-									<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-									
-								</tr>
-								@endforeach
-																
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+			
 			<!-- /Latest Customers -->
 			
 		</div>

@@ -30,6 +30,7 @@
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
 								<th>Email</th>
+								<th>Role</th>
 								<th>Created date</th>
 								<th class="text-center action-btn">Actions</th>
 							</tr>
@@ -50,15 +51,21 @@
 								<td>
 									{{$user->email}}
 								</td>
-								
+								@can('update-role')
+								<td>
+									@foreach ($user->getRoleNames() as $role)
+									{{$role}}
+									@endforeach
+								</td>
+								@endcan
 								<td>{{date_format(date_create($user->created_at),"d M,Y")}}</td>
 
 								<td class="text-center">
 									<div class="actions">
-										<a data-id="{{$user->id}}" data-name="{{$user->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
+										<a data-id="{{$user->id}}" data-name="{{$user->name}}" data-email="{{$user->email}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
-										<a data-id="{{$user->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
+										<a data-id="{{$user->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
 											<i class="fe fe-trash"></i> Delete
 										</a>
 									</div>
@@ -95,14 +102,26 @@
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<label for="email">Email</label>
-								<input type="email" name="email" class="form-control" id="email">
+								<label>Email</label>
+								<input type="email" name="email" class="form-control">
 							</div>
 						</div>
 						<div class="col-12">
 							<div class="form-group">
-								<label for="avatar">User Picture</label>
-								<input type="file" name="avatar" id="avatar">
+								<label>Role</label>
+								<div class="form-group">
+									<select class="form-control select" name="role"> 
+										@foreach ($roles as $role)
+											<option value="{{$role->name}}">{{$role->name}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="form-group">
+								<label>Picture</label>
+								<input type="file" name="avatar">
 							</div>
 						</div>
 						<div class="col-12">
@@ -145,14 +164,55 @@
 					@csrf
 					@method("PUT")
 					<div class="row form-row">
+						<input type="hidden" name="id" id="edit_id">
 						<div class="col-12">
-							<input type="hidden" name="id" id="edit_id">
 							<div class="form-group">
-								<label>Category</label>
-								<input type="text" class="form-control edit_name" name="name">
+								<label>Full Name</label>
+								<input type="text" name="name" class="form-control edit_name" placeholder="John Doe">
 							</div>
 						</div>
-						
+						<div class="col-12">
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" name="email" class="form-control edit_email" id="email">
+							</div>
+						</div>
+						@can('update-role')
+						<div class="col-12">
+							<div class="form-group">
+								<label>Role</label>
+								<div class="form-group">
+									<select class="form-control select edit_role" name="role"> 
+										@foreach ($roles as $role)
+											<option value="{{$role->name}}">{{$role->name}}</option>
+										@endforeach
+									</select>
+								</div>
+							</div>
+						</div>
+						@endcan
+						<div class="col-12">
+							<div class="form-group">
+								<label for="avatar">User Picture</label>
+								<input type="file" name="avatar" id="avatar">
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="row">
+								<div class="col-6">
+									<div class="form-group">
+										<label>Password</label>
+										<input type="password" name="password" class="form-control">
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label>Confirm Password</label>
+										<input type="password" name="password_confirmation" class="form-control">
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
 				</form>
@@ -172,13 +232,21 @@
 	<script>
 		$(document).ready(function() {
 			$('.editbtn').on('click',function (){
+				event.preventDefault();
+				jQuery.noConflict();
 				$('#edit_user').modal('show');
 				var id = $(this).data('id');
 				var name = $(this).data('name');
+				var email = $(this).data('email');
+				var role = $(this).data('role');
 				$('#edit_id').val(id);
 				$('.edit_name').val(name);
+				$('.edit_email').val(email);
+				$('.edit_role').val(role);
 			});
 			//
+			
+			
 		});
 	</script>
 	

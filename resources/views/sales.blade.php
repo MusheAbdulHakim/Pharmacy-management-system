@@ -12,9 +12,11 @@
 		<li class="breadcrumb-item active">Sales</li>
 	</ul>
 </div>
+@can('create-sales')
 <div class="col-sm-5 col">
 	<a href="#add_sales" data-toggle="modal" class="btn btn-primary float-right mt-2">Add Sales</a>
 </div>
+@endcan
 @endpush
 
 @section('content')
@@ -29,27 +31,33 @@
 						<thead>
 							<tr>
 								<th>Medicine Name</th>
+								<th>Quantity</th>
 								<th>Total Price</th>
 								<th>Date</th>
-								<th class="action-btn">Action</th>
+								{{-- <th class="action-btn">Action</th> --}}
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($sales as $sale)
 							<tr>
 								<td>{{$sale->product->purchase->name}}</td>
+								<td>{{$sale->quantity}}</td>
 								<td>{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}</td>
 								<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-								<td>
+								{{-- <td>
 									<div class="actions">
-										<a class="btn btn-sm bg-success-light" href="javascript:void(0);">
+										@can('update-sales')
+										<a data-id="{{$sale->id}}" data-product="{{$sale->product_id}}" data-quantity="{{$sale->quantity}}" class="btn btn-sm bg-success-light editbtn" href="javascript:void(0);">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
+										@endcan
+										@can('destroy-sales')
 										<a data-id="{{$sale->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
 											<i class="fe fe-trash"></i> Delete
 										</a>
+										@endcan
 									</div>
-								</td>
+								</td> --}}
 							</tr>
 							@endforeach
 						</tbody>
@@ -107,5 +115,17 @@
 
 
 @push('page-js')
-	
+	<script>
+		$(document).ready(function(){
+			$('.editbtn').on('click',function (){
+				event.preventDefault();
+				jQuery.noConflict();
+				$('edit_sale').modal('show');
+				var id = $(this).data('id');
+				var product = $(this).data('product');
+				var quantity = $(this).data('quantity');
+
+			});
+		});
+	</script>
 @endpush

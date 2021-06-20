@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @push('page-css')
-
+<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -25,7 +25,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover table-center mb-0">
+					<table class="datatable table table-striped table-bordered table-hover table-center mb-0">
 						<thead>
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
@@ -41,13 +41,13 @@
 								</td>
 								<td>
 									@foreach ($role->getAllPermissions() as $permission)
-									<span class="badge badge-pil flex m-1 badge-default">{{ $permission->name }}</span>
+									<span>{{ $permission->name }}</span>
 									@endforeach
 								</td>
 
 								<td class="text-center">
 									<div class="actions">
-										<a data-id="{{$role->id}}" data-role="{{$role->name}}" data-permission="{{$role->getAllPermissions()}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
+										<a data-id="{{$role->id}}" data-role="{{$role->name}}" data-permissions="{{$role->getAllPermissions()}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
 										<a data-id="{{$role->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
@@ -85,7 +85,7 @@
 								<input type="text" name="role" class="form-control">
 							</div>
 							<div class="form-group">
-								<select class="form-control select" name="product"> 
+								<select class="selectpicker w-100" name="permission[]" multiple> 
 									@foreach ($permissions as $permission)
 										<option value="{{$permission->name}}">{{$permission->name}}</option>
 									@endforeach
@@ -120,10 +120,10 @@
 							<input type="hidden" name="id" id="edit_id">
 							<div class="form-group">
 								<label>Role</label>
-								<input type="text" class="form-control edit_role" name="role">
+								<input type="text" name="role" class="form-control edit_role">
 							</div>
 							<div class="form-group">
-								<select class="form-control select" multiple name="product"> 
+								<select class="selectpicker w-100 edit_perms" name="permission[]" multiple> 
 									@foreach ($permissions as $permission)
 										<option value="{{$permission->name}}">{{$permission->name}}</option>
 									@endforeach
@@ -147,6 +147,7 @@
 
 
 @push('page-js')
+	<script src="{{asset('assets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 	<script>
 		$(document).ready(function() {
 			$('.editbtn').on('click',function (){
@@ -155,9 +156,10 @@
 				$('#edit_role').modal('show');
 				var id = $(this).data('id');
 				var role = $(this).data('role');
+				var permissions = $(this).data('permissions');
 				$('#edit_id').val(id);
 				$('.edit_role').val(role);
-				$('#edit_perms').val(permissions);
+				$('.edit_perms').val(permissions);
 			});
 			//
 		});

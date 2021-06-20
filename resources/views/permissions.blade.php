@@ -25,7 +25,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover table-center mb-0">
+					<table class="datatable table table-striped table-bordered table-hover table-center mb-0">
 						<thead>
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
@@ -44,12 +44,16 @@
 
 								<td class="text-center">
 									<div class="actions">
+										@can('update-permission')
 										<a data-id="{{$permission->id}}" data-permission="{{$permission->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
+										@endcan
+										@can('destroy-permission')
 										<a data-id="{{$permission->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
 											<i class="fe fe-trash"></i> Delete
 										</a>
+										@endcan
 									</div>
 								</td>
 							</tr>

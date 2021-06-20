@@ -31,7 +31,18 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'role'=>'required|max:100',
+            'permission'=>'required'
+        ]);
+        $role = Role::create(['name' => $request->role]);
+        $permissions = $request->permission;
+        $role->syncPermissions($permissions);
+        $notification = array(
+            'message'=>"Role Created Successfully!!",
+            'alert-type'=>"success"
+        );
+        return back()->with($notification);
     }
 
     /**
@@ -52,19 +63,39 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request,[
+            'role'=>'required|max:100',
+            'permission'=>'required'
+        ]);
+        $role = Role::find($request->id);
+        $role->update([
+            'name'=>$request->role,
+        ]);
+        $permissions = $request->permission;
+        $role->syncPermissions($permissions);
+        $notification = array(
+            'message'=>"Role Updated Successfully!!",
+            'alert-type'=>"success"
+        );
+        return back()->with($notification);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $role = Role::find($request->id);
+        $role->delete();
+        $notification = array(
+            'message'=>"Role deleted successfully!!.",
+            'alert-type'=>'success'
+        );
+        return back()->with($notification);
     }
 }

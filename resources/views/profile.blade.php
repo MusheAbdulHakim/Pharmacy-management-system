@@ -65,6 +65,15 @@
 									<p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Email ID</p>
 									<p class="col-sm-10">{{auth()->user()->email}}</p>
 								</div>
+
+								<div class="row">
+									<p class="col-sm-2 text-muted text-sm-right mv-0 mb-sm-3">User Role</p>
+									<p class="col-sm-10">
+										@foreach (auth()->user()->getRoleNames() as $role)
+										{{$role}}
+										@endforeach
+									</p>
+								</div>
 								
 							</div>
 						</div>
@@ -95,7 +104,18 @@
 														<input class="form-control" name="email" type="text" value="{{auth()->user()->email}}" placeholder="Email">
 													</div>
 												</div>
-
+												@can('update-role')
+												<div class="col-12">
+													<div class="form-group">
+														<label>Role</label>
+														<select class="form-control select edit_role" name="role"> 
+															@foreach ($roles as $role)
+																<option value="{{$role->name}}">{{$role->name}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												@endcan
 												<div class="col-12">
 													<div class="form-group">
 														<label>User Avatar</label>

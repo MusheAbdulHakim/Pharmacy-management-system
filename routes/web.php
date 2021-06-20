@@ -88,6 +88,8 @@ Route::group(['middleware'=>['auth']],function (){
     Route::delete('roles',[RoleController::class,'destroy']);
 
     Route::get('users',[UserController::class,'index'])->name('users');
+    Route::post('users',[UserController::class,'store']);
+    Route::put('users',[UserController::class,'update']);
     Route::delete('users',[UserController::class,'destroy']);
 
     Route::get('profile',[UserController::class,'profile'])->name('profile');

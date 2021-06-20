@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -17,8 +18,9 @@ class UserController extends Controller
     {
         $title = "users";
         $users  = User::get();
+        $roles = Role::get();
         return view('users',compact(
-            'title','users'
+            'title','users','roles'
         ));
     }
 
@@ -33,6 +35,7 @@ class UserController extends Controller
         $this->validate($request,[
             'name'=>'required|max:100',
             'email'=>'required|email',
+            'role'=>'required',
             'password'=>'required|confirmed|max:200',
             'avatar'=>'file|image|mimes:jpg,jpeg,gif,png',
         ]);
@@ -41,12 +44,13 @@ class UserController extends Controller
             $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }
-        User::create([
+        $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
             'avatar'=>$imageName
         ]);
+        $user->assignRole($request->role);
         $notification =array(
             'message'=>"User has been added!!!",
             'alert-type'=>'success'
@@ -62,8 +66,9 @@ class UserController extends Controller
     public function profile()
     {
         $title = "profile";
+        $roles = Role::get();
         return view('profile',compact(
-            'title'
+            'title','roles'
         ));
     }
 
@@ -84,7 +89,7 @@ class UserController extends Controller
             $imageName = time().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('storage/users'), $imageName);
         }else{
-            $imageName = $request->avatar;
+            $imageName = auth()->user()->avatar;
         }
         auth()->user()->update([
             'name'=>$request->name,
@@ -146,9 +151,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'=>'required|max:100',
+            'email'=>'required|email',
+            'role'=>'required',
+            'password'=>'required|confirmed|max:200',
+            'avatar'=>'file|image|mimes:jpg,jpeg,gif,png',
+        ]);
+        $imageName = auth()->user()->avatar;
+        if($request->hasFile('avatar')){
+            $imageName = time().'.'.$request->avatar->extension();
+            $request->avatar->move(public_path('storage/users'), $imageName);
+        }
+        $user = User::find($request->id);
+        $user->update([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'avatar'=>$imageName
+        ]);
+        $user->assignRole($request->role);
+        $notification =array(
+            'message'=>"User has been updated!!!",
+            'alert-type'=>'success'
+        );
+        return back()->with($notification);
     }
 
     /**

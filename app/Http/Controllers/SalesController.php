@@ -70,7 +70,7 @@ class SalesController extends Controller
             );
         }
         
-        if($new_quantity <=3 && $new_quantity !=0){
+        elseif($new_quantity <=3 && $new_quantity !=0){
             // send notification 
             $product = Purchase::where('quantity', '<=', 3)->first();
             event(new PurchaseOutStock($product));
@@ -81,8 +81,13 @@ class SalesController extends Controller
             );
             
         }
- 
-        return back()->with($notification);
+        else{
+            $notification = array(
+                'message'=>"Please check purchase product quantity",
+                'alert-type'=>'info',
+            );
+            return back()->with($notification);
+        }
     }
 
     /**

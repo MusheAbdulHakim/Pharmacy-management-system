@@ -34,7 +34,7 @@ class StockAlert extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail','database','broadcast'];
+        return ['database','broadcast'];
     }
 
     /**
@@ -49,7 +49,7 @@ class StockAlert extends Notification
         return (new MailMessage)
                     ->greeting('Hello!')
                     ->line('The Product below is running out of stock.')
-                    ->line("Product's name is ".$this->data->name ."is only ".$this->data->quantity."left in quantity")
+                    ->line("Product's name is ".$this->data->name ." is only ".$this->data->quantity." left in quantity")
                     ->line("Please update the product's quantity or make a new purchase.")
                     ->action('View Product', $url)
                     ->line('Thank you!');
