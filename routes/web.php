@@ -104,7 +104,7 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('notification-read',[NotificationController::class,'read'])->name('read');
 
     Route::get('reports',[ReportController::class,'index'])->name('reports');
-
+    Route::post('reports',[ReportController::class,'getData']);
 });
 
 Route::get('/', function () {
