@@ -21,7 +21,7 @@ class SalesController extends Controller
     {
         $title = "sales";
         $products = Product::get();
-        $sales = Sales::get();
+        $sales = Sales::with('product')->latest()->get();
                 
         return view('sales',compact(
             'title','products','sales'
@@ -48,6 +48,10 @@ class SalesController extends Controller
         **/
         $purchased_item = Purchase::find($sold_product->purchase->id);
         $new_quantity = ($purchased_item->quantity) - ($request->quantity);
+        $notification = array(
+            'message'=>"Please check purchase product quantity",
+            'alert-type'=>'info',
+        );
         if ($new_quantity > 0){
 
             $purchased_item->update([
@@ -68,9 +72,8 @@ class SalesController extends Controller
                 'message'=>"Product has been sold",
                 'alert-type'=>'success',
             );
-        }
-        
-        elseif($new_quantity <=3 && $new_quantity !=0){
+        } 
+        if($new_quantity <=3 && $new_quantity !=0){
             // send notification 
             $product = Purchase::where('quantity', '<=', 3)->first();
             event(new PurchaseOutStock($product));
@@ -81,13 +84,7 @@ class SalesController extends Controller
             );
             
         }
-        else{
-            $notification = array(
-                'message'=>"Please check purchase product quantity",
-                'alert-type'=>'info',
-            );
-            return back()->with($notification);
-        }
+        return back()->with($notification);
     }
 
     /**

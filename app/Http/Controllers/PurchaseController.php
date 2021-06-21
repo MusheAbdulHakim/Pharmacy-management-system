@@ -17,7 +17,7 @@ class PurchaseController extends Controller
     public function index()
     {
         $title = "purchases";
-        $purchases = Purchase::get();
+        $purchases = Purchase::with('category')->get();
         return view('purchases',compact(
             'title','purchases'
         ));

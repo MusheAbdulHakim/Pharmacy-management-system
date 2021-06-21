@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function index()
     {
         $title = "products";
-        $products = Product::get();
+        $products = Product::with('purchase')->get();
     
         return view('products',compact(
             'title','products',
