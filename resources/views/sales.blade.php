@@ -91,7 +91,9 @@
 								<label>Product <span class="text-danger">*</span></label>
 								<select class="form-control select" name="product"> 
 									@foreach ($products as $product)
+										@if (!($product->purchase->quantity <= 0))
 										<option value="{{$product->id}}">{{$product->purchase->name}}</option>
+										@endif
 									@endforeach
 								</select>
 							</div>
