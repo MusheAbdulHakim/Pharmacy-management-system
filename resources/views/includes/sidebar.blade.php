@@ -54,12 +54,12 @@
 				@endcan
 
 				@can('view-reports')
-				{{-- <li class="submenu">
+				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
 						<li><a class="{{ Request::routeIs('reports') ? 'active' : '' }}" href="{{route('reports')}}">Reports</a></li>
 					</ul>
-				</li> --}}
+				</li>
 				@endcan
 
 				@can('view-access-control')
