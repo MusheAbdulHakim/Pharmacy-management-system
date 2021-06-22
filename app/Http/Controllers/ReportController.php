@@ -7,6 +7,7 @@ use App\Models\Sales;
 use App\Models\Product;
 use App\Models\Purchase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -23,19 +24,22 @@ class ReportController extends Controller
             'to_date'=>'required',
             'resource'=>'required',
         ]);
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
         if ($request->resource == 'sales'){
-            $sales = Sales::whereDate('created_at','=',Carbon::now())->get();
+            $sales = Sales::whereBetween(DB::raw('DATE(created_at)'), array($from_date, $to_date))->get();
+            // $sales = Sales::whereDate('created_at','=',Carbon::now())->get();
             $title = "Sales Reports";
             return view('reports',compact('sales','title'));
         }
         if($request->resource == "products"){
             $title = "Products Reports";
-            $products = Product::get();
+            $products = Product::whereBetween(DB::raw('DATE(created_at)'), array($from_date, $to_date))->get();
             return view('reports',compact('title','products'));
         }
         if($request->resource == 'purchases'){
             $title = "Purchases Reports";
-            $purchases = Purchase::get();
+            $purchases = Purchase::whereBetween(DB::raw('DATE(created_at)'), array($from_date, $to_date))->get();
             return view('reports',compact('title','purchases'));
         }
     }
