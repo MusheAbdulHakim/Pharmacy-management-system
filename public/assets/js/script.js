@@ -75,14 +75,7 @@ Version      : 1.3
 		}
 	});
 	
-	// Select 2
 	
-    // if ($('.select').length > 0) {
-    //     $('.select').select2({
-    //         minimumResultsForSearch: -1,
-    //         width: '100%'
-    //     });
-    // }
 	
 	// Datetimepicker
 	
@@ -228,8 +221,11 @@ Version      : 1.3
 			return false;
 		}
 	});
+	
+	
 
 	$(document).ready(function(){
+		
 		// delete confirmation modal
 		$('.deletebtn').on('click',function (){
 			event.preventDefault();
