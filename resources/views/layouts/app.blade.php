@@ -27,7 +27,7 @@
 		<link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.css')}}">
 		<!-- Datatables css -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/DataTables/datatables.css')}}">
-
+		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
@@ -106,7 +106,13 @@
 	<script src="{{asset('assets/js/script.js')}}"></script>
 	<script src="{{asset('js/app.js')}}"></script>
 	<script src="{{asset('assets/js/datatables-customizer.js')}}"></script>
+	
 	<script>
+		$(document).ready(function() {
+			$('.select2').select2({
+				placeholder: 'Select an option'
+			});
+		});
 		@if(Session::has('message'))
 			var type = "{{ Session::get('alert-type', 'info') }}";
 			switch(type){
