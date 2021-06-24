@@ -82,8 +82,15 @@
 						<h6>{{auth()->user()->name}}</h6>
 					</div>
 				</div>
+				
 				<a class="dropdown-item" href="{{route('profile')}}">My Profile</a>
 				@can('view-settings')<a class="dropdown-item" href="{{route('settings')}}">Settings</a>@endcan
+				@can('backup-app')
+				<a class="dropdown-item" href="{{route('backup-app')}}">Backup App</a>
+				@endcan
+				@can('backup-db')
+				<a class="dropdown-item" href="{{route('backup-db')}}">Backup Database</a>
+				@endcan
 				<a class="dropdown-item" href="{{route('logout')}}">Logout</a>
 			</div>
 		</li>
