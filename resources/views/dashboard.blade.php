@@ -27,7 +27,7 @@
 						</div>
 					</div>
 					<div class="dash-widget-info">
-						<h6 class="text-muted">Sales Today</h6>
+						<h6 class="text-muted">Today Sales Cash</h6>
 						<div class="progress progress-sm">
 							<div class="progress-bar bg-primary w-50"></div>
 						</div>
@@ -104,7 +104,7 @@
 		
 			<div class="card card-table">
 				<div class="card-header">
-					<h4 class="card-title ">Latest Sales</h4>
+					<h4 class="card-title ">Today Sales</h4>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
