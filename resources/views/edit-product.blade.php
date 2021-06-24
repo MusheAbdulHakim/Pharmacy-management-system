@@ -33,7 +33,7 @@
 							<div class="col-lg-12">
 								<div class="form-group">
 									<label>Product <span class="text-danger">*</span></label>
-									<select class="form-control select" name="product"> 
+									<select class="select2 form-select form-control" name="product"> 
 										@foreach ($purchased_products as $purchased_product)
 											<option value="{{$purchased_product->id}}">{{$purchased_product->name}}</option>
 										@endforeach

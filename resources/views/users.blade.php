@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('page-css')
-
+<!-- Select2 css-->
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -110,7 +111,7 @@
 							<div class="form-group">
 								<label>Role</label>
 								<div class="form-group">
-									<select class="form-control select" name="role"> 
+									<select class="select2 form-select form-control" name="role"> 
 										@foreach ($roles as $role)
 											<option value="{{$role->name}}">{{$role->name}}</option>
 										@endforeach
@@ -182,7 +183,7 @@
 							<div class="form-group">
 								<label>Role</label>
 								<div class="form-group">
-									<select class="form-control select edit_role" name="role"> 
+									<select class="select2 form-select form-control edit_role" name="role"> 
 										@foreach ($roles as $role)
 											<option value="{{$role->name}}">{{$role->name}}</option>
 										@endforeach
@@ -229,6 +230,9 @@
 
 
 @push('page-js')
+<!-- Select2 js-->
+<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
+
 	<script>
 		$(document).ready(function() {
 			$('.editbtn').on('click',function (){

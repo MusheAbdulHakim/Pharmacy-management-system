@@ -40,7 +40,7 @@
 							<div class="col-lg-4">
 								<div class="form-group">
 									<label>Category <span class="text-danger">*</span></label>
-									<select class="form-control select" name="category"> 
+									<select class="select2 form-select form-control" name="category"> 
 										@foreach ($categories as $category)
 											<option value="{{$category->id}}">{{$category->name}}</option>
 										@endforeach
@@ -50,7 +50,7 @@
 							<div class="col-lg-4">
 								<div class="form-group">
 									<label>Supplier <span class="text-danger">*</span></label>
-									<select class="form-control select" name="supplier"> 
+									<select class="select2 form-select form-control" name="supplier"> 
 										@foreach ($suppliers as $supplier)
 											<option value="{{$supplier->id}}">{{$supplier->name}}</option>
 										@endforeach

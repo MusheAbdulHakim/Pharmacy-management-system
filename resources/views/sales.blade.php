@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('page-css')
-	
+	<!-- Select2 css-->
+	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -89,7 +90,7 @@
 						<div class="col-12">
 							<div class="form-group">
 								<label>Product <span class="text-danger">*</span></label>
-								<select class="form-control select" name="product"> 
+								<select class="select2 form-select form-control" name="product"> 
 									@foreach ($products as $product)
 										@if (!($product->purchase->quantity <= 0))
 										<option value="{{$product->id}}">{{$product->purchase->name}}</option>
@@ -133,7 +134,7 @@
 							<input type="hidden" id="edit_id" name="id">
 							<div class="form-group">
 								<label>Product <span class="text-danger">*</span></label>
-								<select class="form-control select edit_product" name="product"> 
+								<select class="select2 form-select form-control edit_product" name="product"> 
 									@foreach ($products as $product)
 										<option value="{{$product->id}}">{{$product->purchase->name}}</option>
 									@endforeach
@@ -159,6 +160,8 @@
 
 
 @push('page-js')
+	<!-- Select2 js-->
+	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function(){
 			$('.editbtn').on('click',function (){

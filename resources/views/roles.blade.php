@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('page-css')
-<link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-select/bootstrap-select.min.css')}}">
+<!-- Select2 css-->
+<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -85,7 +86,8 @@
 								<input type="text" name="role" class="form-control">
 							</div>
 							<div class="form-group">
-								<select class="selectpicker w-100" name="permission[]" multiple> 
+								<lable>Select Permissions</lable>
+								<select class="select2 form-select form-control" name="permission[]" multiple="multiple"> 
 									@foreach ($permissions as $permission)
 										<option value="{{$permission->name}}">{{$permission->name}}</option>
 									@endforeach
@@ -123,7 +125,8 @@
 								<input type="text" name="role" class="form-control edit_role">
 							</div>
 							<div class="form-group">
-								<select class="selectpicker w-100 edit_perms" name="permission[]" multiple> 
+								<lable>Select Permissions</lable>
+								<select class="select2 form-select form-control edit_perms" name="permission[]" multiple="multiple"> 
 									@foreach ($permissions as $permission)
 										<option value="{{$permission->name}}">{{$permission->name}}</option>
 									@endforeach
@@ -147,7 +150,8 @@
 
 
 @push('page-js')
-	<script src="{{asset('assets/plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
+<!-- Select2 js-->
+<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function() {
 			$('.editbtn').on('click',function (){
