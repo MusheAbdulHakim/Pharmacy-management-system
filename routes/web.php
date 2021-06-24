@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SettingController;
@@ -105,6 +106,9 @@ Route::group(['middleware'=>['auth']],function (){
 
     Route::get('reports',[ReportController::class,'index'])->name('reports');
     Route::post('reports',[ReportController::class,'getData']);
+
+    Route::get('backup',[BackupController::class,'index'])->name('backup-app');
+    Route::get('backup-app',[BackupController::class,'database'])->name('backup-db');
 });
 
 Route::get('/', function () {
