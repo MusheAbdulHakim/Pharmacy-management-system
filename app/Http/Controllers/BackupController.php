@@ -17,4 +17,13 @@ class BackupController extends Controller
         return redirect()->route('dashboard')->with($notification);
     }
 
+    public function database(){
+        Artisan::call('backup:run --only-db');
+        $notification = [
+            'message'=>"Database has been backed up",
+            'alert-type'=>'success',
+        ];
+        return redirect()->route('dashboard')->with($notification);
+    }
+
 }
