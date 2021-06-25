@@ -23,12 +23,13 @@ class RegisterController extends Controller
             'email'=>'required|email',
             'password'=>'required|max:200|confirmed',
         ]);
-        // Role::create(['name'=>'Super-admin']);
-        User::create([
+        
+        $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
         ]);
+        $user->assignRole('Sales-person');
         auth()->attempt($request->only('email','password'));
         return redirect()->route('dashboard');
     }
