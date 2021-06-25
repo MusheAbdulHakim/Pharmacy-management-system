@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @push('page-css')
-	<!-- Datatables CSS -->
-	<link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
+	
 @endpush
 
 @push('page-header')
@@ -89,7 +88,5 @@
 @endsection
 
 @push('page-js')
-	<!-- Datatables JS -->
-	<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-	<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
+	
 @endpush
