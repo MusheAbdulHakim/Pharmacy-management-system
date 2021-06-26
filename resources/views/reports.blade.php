@@ -21,6 +21,49 @@
 @section('content')
 	
 <div class="row">
+	@isset($sales)
+	<div class="col-xl-3 col-sm-6 col-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="dash-widget-header">
+					<span class="dash-widget-icon text-primary border-primary">
+						<i class="fe fe-money"></i>
+					</span>
+					<div class="dash-count">
+						<h3>{{AppSettings::get('app_currency', '$')}} {{$total_cash}}</h3>
+					</div>
+				</div>
+				<div class="dash-widget-info">
+					<h6 class="text-muted">Total Cash</h6>
+					<div class="progress progress-sm">
+						<div class="progress-bar bg-primary w-50"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-sm-6 col-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="dash-widget-header">
+					<span class="dash-widget-icon text-success">
+						<i class="fe fe-activity"></i>
+					</span>
+					<div class="dash-count">
+						<h3>{{$total_sales}}</h3>
+					</div>
+				</div>
+				<div class="dash-widget-info">
+					
+					<h6 class="text-muted">Total Sales</h6>
+					<div class="progress progress-sm">
+						<div class="progress-bar bg-success w-50"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@endisset
 	<div class="col-md-12">
 	
 		@isset($sales)
