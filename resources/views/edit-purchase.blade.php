@@ -43,7 +43,7 @@
 									<label>Category <span class="text-danger">*</span></label>
 									<select class="select2 form-select form-control" name="category"> 
 										@foreach ($categories as $category)
-											<option value="{{$category->id}}">{{$category->name}}</option>
+											<option @if($purchase->category->id == $category->id) selected @endif value="{{$category->id}}">{{$category->name}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -53,7 +53,7 @@
 									<label>Supplier <span class="text-danger">*</span></label>
 									<select class="select2 form-select form-control" name="supplier"> 
 										@foreach ($suppliers as $supplier)
-											<option value="{{$supplier->id}}">{{$supplier->name}}</option>
+											<option @if($purchase->supplier->id == $supplier->id) selected @endif value="{{$supplier->id}}">{{$supplier->name}}</option>
 										@endforeach
 									</select>
 								</div>

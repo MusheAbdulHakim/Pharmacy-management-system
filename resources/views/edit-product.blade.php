@@ -35,7 +35,7 @@
 									<label>Product <span class="text-danger">*</span></label>
 									<select class="select2 form-select form-control" name="product"> 
 										@foreach ($purchased_products as $purchased_product)
-											<option value="{{$purchased_product->id}}">{{$purchased_product->name}}</option>
+											<option @if($purchased_product->id==$product->purchase->id)selected @endif value="{{$purchased_product->id}}">{{$purchased_product->name}}</option>
 										@endforeach
 									</select>
 								</div>
