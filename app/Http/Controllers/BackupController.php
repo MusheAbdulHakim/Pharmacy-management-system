@@ -9,7 +9,7 @@ class BackupController extends Controller
 {
     
     public function index(){
-        Artisan::call('backup:run');
+        Artisan::call('backup:run --disable-notifications');
         $notification = [
             'message'=>"Backup has been made",
             'alert-type'=>'success',
@@ -18,7 +18,7 @@ class BackupController extends Controller
     }
 
     public function database(){
-        Artisan::call('backup:run --only-db');
+        Artisan::call('backup:run --only-db --disable-notifications');
         $notification = [
             'message'=>"Database has been backed up",
             'alert-type'=>'success',
