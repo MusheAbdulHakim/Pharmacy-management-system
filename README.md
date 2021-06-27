@@ -1,4 +1,4 @@
-# Complte pharmacy management system
+# Complete pharmacy management system
 
 # Features
 
@@ -16,6 +16,56 @@
 12. Dashboard
 13. Stock notifications
 
+# Installation
+ Follow these steps to install the application.
+1. Clone the Repository
+```
+git clone https://github.com/MusheAbdulHakim/Pharmacy-management-system.git
+
+```
+2. Go to project directory
+
+```
+cd Pharmacy-management-system
+
+```
+
+3. Install packages with composer
+
+```
+composer install
+
+```
+
+4. Install npm packages with 
+```
+npm install;npm run dev
+
+```
+5. Create your database 
+
+6. Set database connection to your database in the .env file.
+
+7. Import full database sql file in the database folder, or run migrations
+Use this command to run migrations
+
+```
+php artisan migrate --seed
+
+```
+8. Start the local server and browser to your app.
+This command will start the development server
+```
+php artisan serve
+
+```
+
+9. Open the address in the terminal in your browser.Usually address is usually like this:
+```
+http://127.0.0.1:8000
+
+```
+10. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
 
 # Usage
 
@@ -25,12 +75,11 @@
 	You can also change your password by clicking on the password tab
 	and choosing your new password.Also make sure you type your old password correctly
 
--Users => 
+- Users => 
 	list of all users in the system.
 	You can add new user by clicking on the add user button on the users page.
 	You can also edit user details by clicking on the edit button on the users page.
 	You can easily delete a user by clicking on the delete button.
-
 	You can export or print all the users data by clicking on the export data button dropdown.
 
 
@@ -38,7 +87,6 @@
 	User roles and permissions are here.
 	Every user in the system has a role and each role has some number of permissions in the system.
 	You can create new roles and choose their permissions. 
-
 	Click the add role button, and write the role name and choose some number of permissions you want 
 	the user holding this role to have and submit.
 	you can edit or delete roles by clicking on either the edit button or delete button.
@@ -62,15 +110,13 @@
 	and choosing which option you want.
 
 
--Purchases =>
+- Purchases =>
 	The Purchases page contains all your product purchases.This is the core part of the 
 	your application products.
 	you can add purchases by clicking on the add new button on the purchases page or by clicking on the add purchase button
 	on the sidebar.After that, fill in the details and submit the form.
-
 	You can edit purchases by clicking edit button on the purchases page.
 	You can also delete purchase by clicking on the delete button on the purchases page.
-
 	You can also export or print the purchases data by clicking on the export data dropdown And choose your option.
 
 - Products =>
