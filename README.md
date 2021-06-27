@@ -44,28 +44,35 @@ npm install;npm run dev
 ```
 5. Create your database 
 
-6. Set database connection to your database in the .env file.
+6. Rename .env.example to .env Or copy it and paste at project root directory and name the file .env.You can also use this command.
 
-7. Import full database sql file in the database folder, or run migrations
+```
+cp .env.example ./.env
+
+```
+
+7. Set database connection to your database in the .env file.
+
+8. Import full database sql file in the database folder, or run migrations
 Use this command to run migrations
 
 ```
 php artisan migrate --seed
 
 ```
-8. Start the local server and browser to your app.
+9. Start the local server and browser to your app.
 This command will start the development server
 ```
 php artisan serve
 
 ```
 
-9. Open the address in the terminal in your browser.Usually address is usually like this:
+10. Open the address in the terminal in your browser.Usually address is usually like this:
 ```
 http://127.0.0.1:8000
 
 ```
-10. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
+11. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
 
 # Usage
 
@@ -160,7 +167,11 @@ http://127.0.0.1:8000
 6. When you are notified of the stock, just update the purchased product quantity.
 Or make a new purchase.
 
+![ScreenShot](screenshots/login.png?raw=true "Login page")
 
+![Dashboard](screenshots/dashboard.png?raw=true "Dashbaord page")
+
+![Profile](screenshots/dashboard.png?raw=true "User profile")
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
