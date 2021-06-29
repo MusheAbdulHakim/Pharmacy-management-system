@@ -50,29 +50,43 @@ npm install;npm run dev
 cp .env.example ./.env
 
 ```
+7. Generate app key with this command
+```
+php artisand key:generate
 
-7. Set database connection to your database in the .env file.
+```
 
-8. Import full database sql file in the database folder, or run migrations
+8. Set database connection to your database in the .env file.
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=doccure
+DB_USERNAME=root
+DB_PASSWORD=
+
+```
+9. Import full database sql file in the database folder, or run migrations
 Use this command to run migrations
 
 ```
 php artisan migrate --seed
 
 ```
-9. Start the local server and browser to your app.
+10. Start the local server and browser to your app.
 This command will start the development server
 ```
 php artisan serve
 
 ```
 
-10. Open the address in the terminal in your browser.Usually address is usually like this:
+11. Open the address in the terminal in your browser.Usually address is usually like this:
 ```
 http://127.0.0.1:8000
 
 ```
-11. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
+12. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
 
 # Usage
 
@@ -137,7 +151,6 @@ http://127.0.0.1:8000
 		It is refered to as outstocked product.
 		You don't need to add or delete outstocked products.
 		The system automatically recognize outstocked products and put the there
-
 		You also export or print them too.
 
 	->Expired =>This page  contains all products that are expired.That is products whose expiry date has reach.
