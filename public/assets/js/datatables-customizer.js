@@ -1,19 +1,6 @@
-// $(document).ready(function ()
-// 	// datatables
-// 	$('.datatable').DataTable( {
-// 		dom: 'Bfrtip',
-// 		buttons: {
-// 			buttons: [ 'copy', 'csv', 'excel','pdf' ,'print']
-// 		}
-// 	} );
-
-	
-// });
-
-
 $(document).ready(function (){
 	$('.datatable').DataTable();
-	// datatables
+	// datatable export buttons
 	$('#datatable-export').DataTable( {
 		dom: 'Bfrtip',		
 		buttons: [
