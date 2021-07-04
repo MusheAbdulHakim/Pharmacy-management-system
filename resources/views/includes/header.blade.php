@@ -4,7 +4,7 @@
 	<!-- Logo -->
 	<div class="header-left">
 		<a href="{{route('dashboard')}}" class="logo">
-			<img src="{{asset('storage/'.AppSettings::get('logo'))}}" alt="Logo">
+			<img src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" alt="Logo">
 		</a>
 		<a href="{{route('dashboard')}}" class="logo logo-small">
 			<img src="{{asset('assets/img/logo-small.png')}}" alt="Logo" width="30" height="30">
