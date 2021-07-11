@@ -161,7 +161,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form method="post" action="{{route('categories')}}">
+				<form method="post" enctype="multipart/form-data" action="{{route('users')}}">
 					@csrf
 					@method("PUT")
 					<div class="row form-row">
