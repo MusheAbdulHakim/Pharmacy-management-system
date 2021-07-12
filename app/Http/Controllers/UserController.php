@@ -189,6 +189,13 @@ class UserController extends Controller
     public function destroy(Request $request)
     {
         $user = User::find($request->id);
+        if($user->hasRole('super-admin')){
+            $notification=array(
+                'message'=>"Super admin cannot be deleted",
+                'alert-type'=>'warning',
+            );
+            return back()->with($notification);
+        }
         $user->delete();
         $notification=array(
             'message'=>"User has been deleted",
