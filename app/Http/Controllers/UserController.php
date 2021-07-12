@@ -24,7 +24,7 @@ class UserController extends Controller
         ));
     }
 
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -115,7 +115,7 @@ class UserController extends Controller
             'old_password'=>'required',
             'password'=>'required|max:200|confirmed',
         ]);
-        
+
         if (password_verify($request->old_password,auth()->user()->password)){
             auth()->user()->update(['password'=>Hash::make($request->password)]);
             $notification = array(
@@ -156,7 +156,6 @@ class UserController extends Controller
         $this->validate($request,[
             'name'=>'required|max:100',
             'email'=>'required|email',
-            'role'=>'required',
             'password'=>'required|confirmed|max:200',
             'avatar'=>'file|image|mimes:jpg,jpeg,gif,png',
         ]);
