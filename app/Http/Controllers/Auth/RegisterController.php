@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
         ]);
-        $user->assignRole('Sales-person');
+        $user->assignRole('sales-person');
         auth()->attempt($request->only('email','password'));
         return redirect()->route('dashboard');
     }
