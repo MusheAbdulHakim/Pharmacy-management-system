@@ -38,14 +38,14 @@
 						</thead>
 						<tbody>
 							@foreach ($users as $user)
-							<tr>								
+							<tr>
 								<td>
 									<h2 class="table-avatar">
 										@if(!empty($user->avatar))
 										<span class="avatar avatar-sm mr-2">
 											<img class="avatar-img" src="{{asset('storage/users/'.$user->avatar)}}" alt="product image">
 										</span>
-										@endif	
+										@endif
 										{{$user->name}}
 									</h2>
 								</td>
@@ -72,13 +72,13 @@
 									</div>
 								</td>
 							</tr>
-							@endforeach							
+							@endforeach
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	</div>			
+	</div>
 </div>
 
 <!-- Add Modal -->
@@ -111,7 +111,7 @@
 							<div class="form-group">
 								<label>Role</label>
 								<div class="form-group">
-									<select class="select2 form-select form-control" name="role"> 
+									<select class="select2 form-select form-control" name="role">
 										@foreach ($roles as $role)
 											<option value="{{$role->name}}">{{$role->name}}</option>
 										@endforeach
@@ -155,7 +155,7 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Edit Category</h5>
+				<h5 class="modal-title">Edit User</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -183,7 +183,7 @@
 							<div class="form-group">
 								<label>Role</label>
 								<div class="form-group">
-									<select class="select2 form-select form-control edit_role" name="role"> 
+									<select class="select2 form-select form-control edit_role" name="role">
 										@foreach ($roles as $role)
 											<option value="{{$role->name}}">{{$role->name}}</option>
 										@endforeach
@@ -249,9 +249,9 @@
 				$('.edit_role').val(role);
 			});
 			//
-			
-			
+
+
 		});
 	</script>
-	
+
 @endpush
