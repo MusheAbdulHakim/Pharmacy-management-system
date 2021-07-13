@@ -73,7 +73,7 @@ class PurchaseController extends Controller
             'message'=>"Purchase has been added",
             'alert-type'=>'success',
         );
-        return back()->with($notifications);
+        return redirect()->route('purchases')->with($notifications);
     }
 
     /**

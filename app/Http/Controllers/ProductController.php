@@ -97,7 +97,7 @@ class ProductController extends Controller
             'message'=>"Product has been added",
             'alert-type'=>'success',
         );
-        return back()->with($notification);
+        return redirect()->route('products')->with($notification);
     }
 
     /**
