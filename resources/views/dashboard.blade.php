@@ -119,15 +119,17 @@
 							</thead>
 							<tbody>
 								@foreach ($latest_sales as $sale)
-								<tr>
-									<td>{{!empty($sale->product->purchase->name) ? $sale->product->purchase->name: 'product removed'}}</td>
-									<td>{{$sale->quantity}}</td>
-									<td>
-										{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
-									</td>
-									<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-									
-								</tr>
+									@if(!empty($sale->product->purchase))
+										<tr>
+											<td>{{$sale->product->purchase->name}}</td>
+											<td>{{$sale->quantity}}</td>
+											<td>
+												{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
+											</td>
+											<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
+											
+										</tr>
+									@endif
 								@endforeach
 																
 							</tbody>

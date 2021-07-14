@@ -40,26 +40,28 @@
 						</thead>
 						<tbody>
 							@foreach ($sales as $sale)
-							<tr>
-								<td>{{!empty($sale->product->purchase->name) ? $sale->product->purchase->name: 'product removed'}}</td>
-								<td>{{$sale->quantity}}</td>
-								<td>{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}</td>
-								<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-								<td>
-									<div class="actions">
-										@can('update-sales')
-										<a data-id="{{$sale->id}}" data-product="{{$sale->product_id}}" data-quantity="{{$sale->quantity}}" class="btn btn-sm bg-success-light editbtn" href="javascript:void(0);">
-											<i class="fe fe-pencil"></i> Edit
-										</a>
-										@endcan
-										@can('destroy-sales')
-										<a data-id="{{$sale->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
-											<i class="fe fe-trash"></i> Delete
-										</a>
-										@endcan
-									</div>
-								</td>
-							</tr>
+								@if (!(empty($sale->product->purchase)))
+									<tr>
+										<td>{{$sale->product->purchase->name}}</td>
+										<td>{{$sale->quantity}}</td>
+										<td>{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}</td>
+										<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
+										<td>
+											<div class="actions">
+												@can('update-sales')
+												<a data-id="{{$sale->id}}" data-product="{{$sale->product_id}}" data-quantity="{{$sale->quantity}}" class="btn btn-sm bg-success-light editbtn" href="javascript:void(0);">
+													<i class="fe fe-pencil"></i> Edit
+												</a>
+												@endcan
+												@can('destroy-sales')
+												<a data-id="{{$sale->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
+													<i class="fe fe-trash"></i> Delete
+												</a>
+												@endcan
+											</div>
+										</td>
+									</tr>
+								@endif
 							@endforeach
 						</tbody>
 					</table>
@@ -92,8 +94,10 @@
 								<label>Product <span class="text-danger">*</span></label>
 								<select class="select2 form-select form-control" name="product"> 
 									@foreach ($products as $product)
-										@if (!($product->purchase->quantity <= 0))
-										<option value="{{$product->id}}">{{$product->purchase->name}}</option>
+										@if (!empty($product->purchase))
+											@if (!($product->purchase->quantity <= 0))
+												<option value="{{$product->id}}">{{$product->purchase->name}}</option>
+											@endif
 										@endif
 									@endforeach
 								</select>
@@ -136,7 +140,11 @@
 								<label>Product <span class="text-danger">*</span></label>
 								<select class="select2 form-select form-control edit_product" name="product"> 
 									@foreach ($products as $product)
-										<option value="{{$product->id}}">{{$product->purchase->name}}</option>
+										@if (!empty($product->purchase))
+											@if (!($product->purchase->quantity <= 0))
+												<option value="{{$product->id}}">{{$product->purchase->name}}</option>
+											@endif
+										@endif
 									@endforeach
 								</select>
 							</div>
