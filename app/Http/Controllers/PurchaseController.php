@@ -49,8 +49,8 @@ class PurchaseController extends Controller
         $this->validate($request,[
             'name'=>'required|max:200',
             'category'=>'required',
-            'price'=>'required',
-            'quantity'=>'required',
+            'price'=>'required|min:1',
+            'quantity'=>'required|min:1',
             'expiry_date'=>'required',
             'supplier'=>'required',
             'image'=>'file|image|mimes:jpg,jpeg,png,gif',
