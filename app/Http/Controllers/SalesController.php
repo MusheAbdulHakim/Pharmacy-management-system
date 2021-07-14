@@ -46,6 +46,13 @@ class SalesController extends Controller
             sold item from
          purchases
         **/
+        if($request->quantity <= 0){
+            $notification = array(
+                'message' => "Quantity cannot be zero or less !!",
+                'alert-type' =>'warning',
+            );
+            return back()->with($notification);
+        }
         $purchased_item = Purchase::find($sold_product->purchase->id);
         $new_quantity = ($purchased_item->quantity) - ($request->quantity);
         $notification = '';
