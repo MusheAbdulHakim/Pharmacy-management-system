@@ -120,7 +120,7 @@
 							<tbody>
 								@foreach ($latest_sales as $sale)
 								<tr>
-									<td>{{$sale->product->purchase->name}}</td>
+									<td>{{!empty($sale->product->purchase->name) ? $sale->product->purchase->name: 'product removed'}}</td>
 									<td>{{$sale->quantity}}</td>
 									<td>
 										{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
