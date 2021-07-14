@@ -48,11 +48,8 @@ class SalesController extends Controller
         **/
         $purchased_item = Purchase::find($sold_product->purchase->id);
         $new_quantity = ($purchased_item->quantity) - ($request->quantity);
-        $notification = array(
-            'message'=>"Please check purchase product quantity",
-            'alert-type'=>'info',
-        );
-        if ($new_quantity > 0){
+        $notification = '';
+        if (!($new_quantity < 0)){
 
             $purchased_item->update([
                 'quantity'=>$new_quantity,
@@ -73,9 +70,9 @@ class SalesController extends Controller
                 'alert-type'=>'success',
             );
         } 
-        if($new_quantity <=3 && $new_quantity !=0){
+        if($new_quantity <=1 && $new_quantity !=0){
             // send notification 
-            $product = Purchase::where('quantity', '<=', 3)->first();
+            $product = Purchase::where('quantity', '<=', 1)->first();
             event(new PurchaseOutStock($product));
             // end of notification 
             $notification = array(
