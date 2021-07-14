@@ -82,13 +82,15 @@
 							</thead>
 							<tbody>
 								@foreach ($sales as $sale)
-								<tr>
-									<td>{{$sale->product->purchase->name}}</td>
-									<td>{{$sale->quantity}}</td>
-									<td>{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}</td>
-									<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-									
-								</tr>
+									@if (!(empty($sale->product->purchase)))
+										<tr>
+											<td>{{$sale->product->purchase->name}}</td>
+											<td>{{$sale->quantity}}</td>
+											<td>{{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}</td>
+											<td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
+											
+										</tr>
+									@endif
 								@endforeach
 							</tbody>
 						</table>
@@ -118,36 +120,38 @@
 							<tbody>
 
 								@foreach ($products as $product)
-								<tr>
-									<td>
-										<h2 class="table-avatar">
-											@if(!empty($product->purchase->image))
-											<span class="avatar avatar-sm mr-2">
-												<img class="avatar-img" src="{{asset('storage/purchases/'.$product->purchase->image)}}" alt="product image">
-											</span>
-											@endif
-											{{$product->purchase->name}}
-										</h2>
-									</td>
-									<td>{{$product->purchase->category->name}}</td>
-									<td>{{AppSettings::get('app_currency', '$')}} {{$product->price}}
-									</td>
-									<td>{{$product->purchase->quantity}}</td>
-									<td>{{$product->discount}}%</td>
-									<td>
-									{{date_format(date_create($product->purchase->expiry_date),"d M, Y")}}</span>										
-									</td>
-									<td>
-										<div class="actions">
-											<a class="btn btn-sm bg-success-light" href="{{route('edit-product',$product)}}">
-												<i class="fe fe-pencil"></i> Edit
-											</a>
-											<a data-id="{{$product->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
-												<i class="fe fe-trash"></i> Delete
-											</a>
-										</div>
-									</td>
-								</tr>
+									@if (!(empty($product->purchase)))
+										<tr>
+											<td>
+												<h2 class="table-avatar">
+													@if(!empty($product->purchase->image))
+													<span class="avatar avatar-sm mr-2">
+														<img class="avatar-img" src="{{asset('storage/purchases/'.$product->purchase->image)}}" alt="product image">
+													</span>
+													@endif
+													{{$product->purchase->name}}
+												</h2>
+											</td>
+											<td>{{$product->purchase->category->name}}</td>
+											<td>{{AppSettings::get('app_currency', '$')}} {{$product->price}}
+											</td>
+											<td>{{$product->purchase->quantity}}</td>
+											<td>{{$product->discount}}%</td>
+											<td>
+											{{date_format(date_create($product->purchase->expiry_date),"d M, Y")}}</span>										
+											</td>
+											<td>
+												<div class="actions">
+													<a class="btn btn-sm bg-success-light" href="{{route('edit-product',$product)}}">
+														<i class="fe fe-pencil"></i> Edit
+													</a>
+													<a data-id="{{$product->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
+														<i class="fe fe-trash"></i> Delete
+													</a>
+												</div>
+											</td>
+										</tr>
+									@endif
 								@endforeach
 								
 							</tbody>
@@ -177,33 +181,35 @@
 							</thead>
 							<tbody>
 								@foreach ($purchases as $purchase)
-								<tr>
-									<td>
-										<h2 class="table-avatar">
-											@if(!empty($purchase->image))
-											<span class="avatar avatar-sm mr-2">
-												<img class="avatar-img" src="{{asset('storage/purchases/'.$purchase->image)}}" alt="product image">
-											</span>
-											@endif
-											{{$purchase->name}}
-										</h2>
-									</td>
-									<td>{{$purchase->category->name}}</td>
-									<td>{{AppSettings::get('app_currency', '$')}}{{$purchase->price}}</td>
-									<td>{{$purchase->quantity}}</td>
-									<td>{{$purchase->supplier->name}}</td>
-									<td>{{date_format(date_create($purchase->expiry_date),"d M, Y")}}</td>
-									<td>
-										<div class="actions">
-											<a class="btn btn-sm bg-success-light" href="{{route('edit-purchase',$purchase)}}">
-												<i class="fe fe-pencil"></i> Edit
-											</a>
-											<a data-id="{{$purchase->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
-												<i class="fe fe-trash"></i> Delete
-											</a>
-										</div>
-									</td>
-								</tr>
+									@if(!empty($purchase->supplier) && !empty($purchase->category))
+									<tr>
+										<td>
+											<h2 class="table-avatar">
+												@if(!empty($purchase->image))
+												<span class="avatar avatar-sm mr-2">
+													<img class="avatar-img" src="{{asset('storage/purchases/'.$purchase->image)}}" alt="product image">
+												</span>
+												@endif
+												{{$purchase->name}}
+											</h2>
+										</td>
+										<td>{{$purchase->category->name}}</td>
+										<td>{{AppSettings::get('app_currency', '$')}}{{$purchase->price}}</td>
+										<td>{{$purchase->quantity}}</td>
+										<td>{{$purchase->supplier->name}}</td>
+										<td>{{date_format(date_create($purchase->expiry_date),"d M, Y")}}</td>
+										<td>
+											<div class="actions">
+												<a class="btn btn-sm bg-success-light" href="{{route('edit-purchase',$purchase)}}">
+													<i class="fe fe-pencil"></i> Edit
+												</a>
+												<a data-id="{{$purchase->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
+													<i class="fe fe-trash"></i> Delete
+												</a>
+											</div>
+										</td>
+									</tr>
+									@endif
 								@endforeach
 								
 							</tbody>
