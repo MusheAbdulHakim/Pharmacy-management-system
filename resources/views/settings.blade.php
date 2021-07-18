@@ -4,7 +4,8 @@
 @extends('layouts.app')
 
 @push('page-css')
-	
+	<!-- Select2 css-->
+	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 
@@ -29,6 +30,7 @@
 @endsection
 
 @push('page-js')
-	
+	<!-- Select2 js-->
+	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 @endpush
 

@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @push('page-css')
-
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -25,7 +26,7 @@
 		<div class="card">
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="datatable table table-striped table-bordered table-hover table-center mb-0">
+					<table id="category-table" class="datatable table table-striped table-bordered table-hover table-center mb-0">
 						<thead>
 							<tr style="boder:1px solid black;">
 								<th>Name</th>
@@ -46,7 +47,7 @@
 
 								<td class="text-center">
 									<div class="actions">
-										<a data-id="{{$category->id}}" data-name="{{$category->name}}" class="btn btn-sm bg-success-light editbtn" data-toggle="modal" href="javascript:void(0)">
+										<a data-id="{{$category->id}}" data-name="{{$category->name}}" class="btn btn-sm bg-success-light editbtn " data-toggle="modal" href="javascript:void(0)">
 											<i class="fe fe-pencil"></i> Edit
 										</a>
 										<a data-id="{{$category->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
@@ -132,9 +133,11 @@
 
 
 @push('page-js')
+<!-- Select2 JS -->
+	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function() {
-			$('.editbtn').on('click',function (){
+			$('#category-table').on('click','.editbtn',function (){
 				event.preventDefault();
 				jQuery.noConflict();
 				$('#edit_category').modal('show');

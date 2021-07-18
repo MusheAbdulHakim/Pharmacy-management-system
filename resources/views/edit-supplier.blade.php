@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @push('page-css')
+	<!-- Select2 CSS -->
+	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
 	<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
-	<!-- Datatables CSS -->
-	<link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -99,9 +99,7 @@
 	<!-- Datetimepicker JS -->
 	<script src="assets/js/moment.min.js"></script>
 	<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-	
-	<!-- Datatables JS -->
-	<script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
-	<script src="assets/plugins/datatables/datatables.min.js"></script>
+	<!-- Select2 JS -->
+	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 @endpush
 
