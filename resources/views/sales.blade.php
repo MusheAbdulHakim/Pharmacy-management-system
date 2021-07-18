@@ -172,7 +172,7 @@
 	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function(){
-			$('.editbtn').on('click',function (){
+			$('#datatable-export').on('click','.editbtn',function (){
 				event.preventDefault();
 				jQuery.noConflict();
 				$('#edit_sale').modal('show');

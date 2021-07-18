@@ -3,9 +3,7 @@
 @push('page-css')
 	<!-- Select2 CSS -->
 	<link rel="stylesheet" href="{{asset('assets/plugins/select2/css/select2.min.css')}}">
-	<!-- Datatables CSS -->
-	<link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
-	<!-- Datetimepicker CSS -->
+		<!-- Datetimepicker CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/bootstrap-datetimepicker.min.css')}}">
 @endpush
 
@@ -114,8 +112,5 @@
 	<script src="{{asset('assets/js/bootstrap-datetimepicker.min.js')}}"></script>
 	<!-- Select2 JS -->
 	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
-	<!-- Datatables JS -->
-	<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-	<script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
 @endpush
 
