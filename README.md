@@ -89,6 +89,15 @@ http://127.0.0.1:8000
 ```
 12. Enjoy and make sure to star the repo :).Report bugs,features and also send your pull requests.
 
+# admin login credentials
+
+```
+ email: admin@admin.com
+ password: admin
+```
+
+Theme: https://themeforest.net/item/doccure-doctor-appointment-booking-system-bootstrap-angular-template/28201296
+
 # Usage
 
 - Profile => 
