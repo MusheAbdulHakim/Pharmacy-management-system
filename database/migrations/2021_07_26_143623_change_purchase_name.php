@@ -14,7 +14,7 @@ class ChangePurchaseName extends Migration
     public function up()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->string('name')->change();
+            $table->string('name')->unique(false)->change();
         });
     }
 
@@ -26,7 +26,8 @@ class ChangePurchaseName extends Migration
     public function down()
     {
         Schema::table('purchases', function (Blueprint $table) {
-            $table->dropColumn('name');
+            $table->dropUnique('purchases_name_unique');
+            $table->dropSoftDeletes();
         });
     }
 }
