@@ -29,6 +29,7 @@
 					<h4 class="user-name mb-0">{{auth()->user()->name}}</h4>
 					<h6 class="text-muted">{{auth()->user()->email}}</h6>
 					TimeZone: <h5>{{date_default_timezone_get()}}</h5>
+                    Current Date and Time: <h5>{{date('d M,Y h:i:s a', time())}}</h5>
 				</div>
 
 			</div>
