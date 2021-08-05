@@ -53,7 +53,7 @@ cp .env.example ./.env
 ```
 7. Generate app key with this command
 ```
-php artisand key:generate
+php artisan key:generate
 
 ```
 
