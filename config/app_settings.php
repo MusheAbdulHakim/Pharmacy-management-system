@@ -19,7 +19,7 @@ return [
                     'class' => 'form-control', // override global input_class
                     'style' => '', // any inline styles
                     'rules' => 'required|min:2|max:20', // validation rules for this input
-                    'value' => '', // any default value
+                    'value' => config('app.name'), // any default value
                     'hint' => 'You can set the app name here' // help block text for input
                 ],
                 [
@@ -44,7 +44,7 @@ return [
                     'preview_class' => 'thumbnail',
                     'preview_style' => 'height:40px'
                 ]
-                   , 
+                   ,
                 [
                     'name' => 'favicon',
                     'type' => 'image',
