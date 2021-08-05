@@ -10,29 +10,29 @@
 
 		<!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
+
 		<!-- Fontawesome CSS -->
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		
+
 		<!-- Main CSS -->
         <link rel="stylesheet" href="assets/css/style.css">
 
 		@yield('page-css')
-		
+
 		<!--[if lt IE 9]>
 			<script src="assets/js/html5shiv.min.js"></script>
 			<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
     </head>
     <body>
-	
+
 		<!-- Main Wrapper -->
         <div class="main-wrapper login-body">
             <div class="login-wrapper">
             	<div class="container">
                 	<div class="loginbox">
                     	<div class="login-left">
-							<img class="img-fluid" src="{{asset('storage/'.AppSettings::get('logo'))}}" alt="Logo">
+							<img class="img-fluid" src="@if(!empty(AppSettings::get('logo'))) {{asset('storage/'.AppSettings::get('logo'))}} @else{{asset('assets/img/logo.png')}} @endif" alt="Logo">
                         </div>
                         <div class="login-right">
 							<div class="login-right-wrap">
@@ -49,18 +49,18 @@
             </div>
         </div>
 		<!-- /Main Wrapper -->
-		
+
     </body>
 	<!-- jQuery -->
 	<script src="assets/js/jquery-3.2.1.min.js"></script>
-	
+
 	<!-- Bootstrap Core JS -->
 	<script src="assets/js/popper.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
-	
+
 	<!-- Custom JS -->
 	<script src="assets/js/script.js"></script>
 	<script src="{{asset('js/app.js')}}"></script>
-	
+
 	@yield('page-js')
 </html>
