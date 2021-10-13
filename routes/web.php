@@ -45,6 +45,8 @@ Route::group(['middleware'=>['guest']],function (){
 
 Route::group(['middleware'=>['auth']],function (){
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class,'index']);
+
     Route::get('logout',[LogoutController::class,'index'])->name('logout');
 
     Route::get('categories',[CategoryController::class,'index'])->name('categories');
@@ -107,10 +109,10 @@ Route::group(['middleware'=>['auth']],function (){
     Route::get('reports',[ReportController::class,'index'])->name('reports');
     Route::post('reports',[ReportController::class,'getData']);
 
-    Route::get('backup',[BackupController::class,'index'])->name('backup-app');
-    Route::get('backup-app',[BackupController::class,'database'])->name('backup-db');
+    
+    Route::get('backup', [BackupController::class,'index'])->name('backup.index');
+    Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
+    Route::get('backup/download/{file_name?}', [BackupController::class,'download'])->name('backup.download');
+    Route::delete('backup/delete/{file_name?}', [BackupController::class,'destroy'])->where('file_name', '(.*)')->name('backup.destroy');
 });
 
-Route::get('/', function () {
-    return redirect()->route('dashboard');
-});
