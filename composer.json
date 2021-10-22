@@ -16,7 +16,8 @@
         "pusher/pusher-php-server": "^7.0",
         "qcod/laravel-app-settings": "^1.4",
         "spatie/laravel-backup": "^6.16",
-        "spatie/laravel-permission": "^4.2"
+        "spatie/laravel-permission": "^4.2",
+        "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
