@@ -21,15 +21,7 @@ class PermissionController extends Controller
         ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+     
 
     /**
      * Store a newly created resource in storage.
@@ -46,34 +38,11 @@ class PermissionController extends Controller
             $permission = Permission::create(['name' => $perm]);
             $permission->assignRole('super-admin');
         }
-        $notification = array(
-            'message'=>"Permission Created Successfully!!",
-            'alert-type'=>"success"
-        );
+        $notification = notify('Permission Created Successfully!!');
         return back()->with($notification);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -82,9 +51,17 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request,[
+            'permission'=>'required|max:200',
+        ]);
+        $permission = Permission::findOrFail($request->id);
+        $permission->update([
+            'name' => $request->permission,
+        ]);
+        $notification = notify('permission updated');
+        return back()->with($notification);
     }
 
     /**
@@ -97,10 +74,7 @@ class PermissionController extends Controller
     {
         $permission = Permission::find($request->id);
         $permission->delete();
-        $notification = array(
-            'message'=>"Permission has been deleted",
-            'alert-type'=>'success',
-        );
+        $notification = notify('Permission has been deleted');
         return back()->with($notification);
     }
 }
