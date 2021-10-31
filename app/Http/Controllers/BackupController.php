@@ -73,7 +73,7 @@ class BackupController extends Controller
                 $notification .= isset($match[1]) ? $match[1] : '';
                 Log::error($notification.PHP_EOL.$output);
             } else {
-                Log::info("Backpack\BackupManager -- backup process has started");
+                Log::info("BackupManager -- backup process has started");
             }
         } catch (Exception $e) {
             Log::error($e);
