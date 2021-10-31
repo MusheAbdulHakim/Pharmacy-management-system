@@ -14,7 +14,6 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^3.1",
-        "pusher/pusher-php-server": "^7.0",
         "qcod/laravel-app-settings": "^1.4",
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-permission": "^4.2",
