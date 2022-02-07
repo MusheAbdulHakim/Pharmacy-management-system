@@ -22,14 +22,12 @@
 			<div class="row align-items-center">
 				<div class="col-auto profile-image">
 					<a href="#">
-						<img class="rounded-circle" alt="User Image" src="@if(!empty(auth()->user()->avatar)){{asset('storage/users/'.auth()->user()->avatar)}}@endif">
+						<img class="rounded-circle" alt="User Image" src="{{!empty(auth()->user()->avatar) ? asset('storage/users/'.auth()->user()->avatar): asset('assets/img/avatar.png')}}">
 					</a>
 				</div>
 				<div class="col ml-md-n2 profile-user-info">
 					<h4 class="user-name mb-0">{{auth()->user()->name}}</h4>
 					<h6 class="text-muted">{{auth()->user()->email}}</h6>
-					TimeZone: <h5>{{date_default_timezone_get()}}</h5>
-                    Current Date and Time: <h5>{{date('d M,Y h:i:s a', time())}}</h5>
 				</div>
 
 			</div>
