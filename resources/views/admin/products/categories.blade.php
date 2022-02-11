@@ -34,28 +34,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{{-- @foreach ($categories as $category)
-							<tr>								
-								<td>
-									<h2 class="table-avatar">	
-										{{$category->name}}
-									</h2>
-								</td>
-								
-								<td>{{date_format(date_create($category->created_at),"d M,Y")}}</td>
-
-								<td class="text-center">
-									<div class="actions">
-										<a data-id="{{$category->id}}" data-name="{{$category->name}}" class="btn btn-sm bg-success-light editbtn " data-toggle="modal" href="javascript:void(0)">
-											<i class="fe fe-pencil"></i> Edit
-										</a>
-										<a data-id="{{$category->id}}" data-toggle="modal" href="javascript:void(0)" class="btn btn-sm bg-danger-light deletebtn">
-											<i class="fe fe-trash"></i> Delete
-										</a>
-									</div>
-								</td>
-							</tr>
-							@endforeach							 --}}
+												
 						</tbody>
 					</table>
 				</div>

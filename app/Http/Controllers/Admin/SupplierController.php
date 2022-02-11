@@ -21,6 +21,7 @@ class SupplierController extends Controller
         if($request->ajax()){
             $suppliers = Supplier::get();
             return DataTables::of($suppliers)
+                ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $editbtn = '<a href="'.route("suppliers.edit", $row->id).'" class="editbtn"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>';
                     $deletebtn = '<a data-id="'.$row->id.'" data-route="'.route('suppliers.destroy', $row->id).'" href="javascript:void(0)" id="deletebtn"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>';
