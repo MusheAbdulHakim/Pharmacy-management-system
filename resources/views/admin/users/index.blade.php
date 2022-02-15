@@ -59,7 +59,7 @@ $(document).ready(function() {
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},
             {data: 'role', name: 'role'},
-			{data: 'avatar', name: 'avatar'},
+			{data: 'avatar', name: 'avatar', orderable: false, searchable: false},
             {data: 'created_at',name: 'created_at'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ]
