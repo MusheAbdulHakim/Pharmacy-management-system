@@ -11,8 +11,11 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +41,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::resource('permissions',PermissionController::class)->only(['index','store','destroy']);
     Route::put('permission',[PermissionController::class,'update'])->name('permissions.update');
     Route::resource('roles',RoleController::class);
+    Route::resource('suppliers',SupplierController::class);
+    Route::resource('categories',CategoryController::class)->only(['index','store','destroy']);
+    Route::put('categories',[CategoryController::class,'update'])->name('categories.update');
+    Route::resource('purchases',PurchaseController::class);
 
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
     Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
