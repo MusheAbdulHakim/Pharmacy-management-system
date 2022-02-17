@@ -11,9 +11,9 @@
 					<a href="{{route('dashboard')}}"><i class="fe fe-home"></i> <span>Dashboard</span></a>
 				</li>
 				
-				{{-- @can('view-category')
-				<li class="{{ route_is('categories') ? 'active' : '' }}"> 
-					<a href="{{route('categories')}}"><i class="fe fe-layout"></i> <span>Categories</span></a>
+				@can('view-category')
+				<li class="{{ route_is('categories.*') ? 'active' : '' }}"> 
+					<a href="{{route('categories.index')}}"><i class="fe fe-layout"></i> <span>Categories</span></a>
 				</li>
 				@endcan
 				
@@ -21,8 +21,8 @@
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Products</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						@can('view-products')<li><a class="{{ route_is(('products')) ? 'active' : '' }}" href="{{route('products')}}">Products</a></li>@endcan
-						@can('create-product')<li><a class="{{ route_is('add-product') ? 'active' : '' }}" href="{{route('add-product')}}">Add Product</a></li>@endcan
+						<li><a class="{{ route_is(('products.*')) ? 'active' : '' }}" href="{{route('products.index')}}">Products</a></li>
+						@can('create-product')<li><a class="{{ route_is('products.create') ? 'active' : '' }}" href="{{route('products.create')}}">Add Product</a></li>@endcan
 						@can('view-outstock-products')<li><a class="{{ route_is('outstock') ? 'active' : '' }}" href="{{route('outstock')}}">Out-Stock</a></li>@endcan
 						@can('view-expired-products')<li><a class="{{ route_is('expired') ? 'active' : '' }}" href="{{route('expired')}}">Expired</a></li>@endcan
 					</ul>
@@ -33,27 +33,28 @@
 				<li class="submenu">
 					<a href="#"><i class="fe fe-star-o"></i> <span> Purchase</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						<li><a class="{{ route_is('purchases') ? 'active' : '' }}" href="{{route('purchases')}}">Purchase</a></li>
+						<li><a class="{{ route_is('purchases.*') ? 'active' : '' }}" href="{{route('purchases.index')}}">Purchase</a></li>
 						@can('create-purchase')
-						<li><a class="{{ route_is('add-purchase') ? 'active' : '' }}" href="{{route('add-purchase')}}">Add Purchase</a></li>
+						<li><a class="{{ route_is('purchases.create') ? 'active' : '' }}" href="{{route('purchases.create')}}">Add Purchase</a></li>
 						@endcan
 					</ul>
 				</li>
 				@endcan
-				@can('view-sales')
+				{{-- @can('view-sales')
 				<li><a class="{{ route_is('sales') ? 'active' : '' }}" href="{{route('sales')}}"><i class="fe fe-activity"></i> <span>Sales</span></a></li>
 				@endcan
+				 --}}
 				@can('view-supplier')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-user"></i> <span> Supplier</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						<li><a class="{{ route_is('suppliers') ? 'active' : '' }}" href="{{route('suppliers')}}">Supplier</a></li>
-						@can('create-supplier')<li><a class="{{ route_is('add-supplier') ? 'active' : '' }}" href="{{route('add-supplier')}}">Add Supplier</a></li>@endcan
+						<li><a class="{{ route_is('suppliers.*') ? 'active' : '' }}" href="{{route('suppliers.index')}}">Supplier</a></li>
+						@can('create-supplier')<li><a class="{{ route_is('suppliers.create') ? 'active' : '' }}" href="{{route('suppliers.create')}}">Add Supplier</a></li>@endcan
 					</ul>
 				</li>
 				@endcan
 
-				@can('view-reports')
+				{{-- @can('view-reports')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
