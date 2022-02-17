@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Auth\ResetPasswordController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SupplierController;
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::resource('categories',CategoryController::class)->only(['index','store','destroy']);
     Route::put('categories',[CategoryController::class,'update'])->name('categories.update');
     Route::resource('purchases',PurchaseController::class);
+    Route::resource('products',ProductController::class)->except('show');
+    Route::get('products/outstock',[ProductController::class,'outstock'])->name('outstock');
+    Route::get('products/expired',[ProductController::class,'expired'])->name('expired');
 
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
     Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
