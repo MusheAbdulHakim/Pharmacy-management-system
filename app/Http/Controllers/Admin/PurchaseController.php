@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Models\Purchase;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Supplier;
+use QCod\AppSettings\Setting\AppSettings;
 
 class PurchaseController extends Controller
 {
@@ -36,6 +37,9 @@ class PurchaseController extends Controller
                     if(!empty($purchase->category)){
                         return $purchase->category->name;
                     }
+                })
+                ->addColumn('cost_price',function($purchase){
+                    return settings('app_currency','$'). ' '. $purchase->cost_price;
                 })
                 ->addColumn('supplier',function($purchase){
                     return $purchase->supplier->name;
