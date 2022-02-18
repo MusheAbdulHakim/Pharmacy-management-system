@@ -40,10 +40,10 @@
 					</ul>
 				</li>
 				@endcan
-				{{-- @can('view-sales')
-				<li><a class="{{ route_is('sales') ? 'active' : '' }}" href="{{route('sales')}}"><i class="fe fe-activity"></i> <span>Sales</span></a></li>
+				@can('view-sales')
+				<li><a class="{{ route_is('sales.*') ? 'active' : '' }}" href="{{route('sales.index')}}"><i class="fe fe-activity"></i> <span>Sales</span></a></li>
 				@endcan
-				 --}}
+				
 				@can('view-supplier')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-user"></i> <span> Supplier</span> <span class="menu-arrow"></span></a>
