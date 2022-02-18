@@ -1,7 +1,9 @@
 @extends('admin.layouts.app')
 
+<x-assets.datatables />
+
 @push('page-css')
-    
+    <link rel="stylesheet" href="{{asset('assets/plugins/chart.js/Chart.min.css')}}">
 @endpush
 
 @push('page-header')
@@ -101,14 +103,13 @@
 </div>
 <div class="row">
     <div class="col-md-12 col-lg-6">
-    
-        <div class="card card-table">
+        <div class="card card-table p-3">
             <div class="card-header">
                 <h4 class="card-title ">Today Sales</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-hover table-center mb-0">
+                    <table id="sales-table" class="datatable table table-hover table-center mb-0">
                         <thead>
                             <tr>
                                 <th>Medicine</th>
@@ -118,26 +119,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($latest_sales as $sale)
-                                @if(!empty($sale->product->purchase))
-                                    <tr>
-                                        <td>{{$sale->product->purchase->name}}</td>
-                                        <td>{{$sale->quantity}}</td>
-                                        <td>
-                                            {{AppSettings::get('app_currency', '$')}} {{($sale->total_price)}}
-                                        </td>
-                                        <td>{{date_format(date_create($sale->created_at),"d M, Y")}}</td>
-                                        
-                                    </tr>
-                                @endif
-                            @endforeach
-                                                            
+                                                                                      
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-        
     </div>
 
     <div class="col-md-12 col-lg-6">
@@ -145,10 +132,10 @@
         <!-- Pie Chart -->
         <div class="card card-chart">
             <div class="card-header">
-                <h4 class="card-title">Resources Sum</h4>
+                <h4 class="card-title text-center">Resources</h4>
             </div>
             <div class="card-body">
-                <div style="width:65%;">
+                <div style="">
                     {!! $pieChart->render() !!}
                 </div>
             </div>
@@ -159,17 +146,25 @@
     
     
 </div>
-<div class="row">
-    <div class="col-md-12">
-    
-        <!-- Latest Customers -->
-        
-        <!-- /Latest Customers -->
-        
-    </div>
-</div>
+
 @endsection
 
 @push('page-js')
-    
+<script>
+    $(document).ready(function() {
+        var table = $('#sales-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('sales.index')}}",
+            columns: [
+                {data: 'product', name: 'product'},
+                {data: 'quantity', name: 'quantity'},
+                {data: 'total_price', name: 'total_price'},
+				{data: 'date', name: 'date'},
+            ]
+        });
+        
+    });
+</script> 
+<script src="{{asset('assets/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 @endpush
