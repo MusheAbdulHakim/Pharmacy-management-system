@@ -40,36 +40,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{{-- @foreach ($purchases as $purchase)
-							<tr>
-								<td>
-									<h2 class="table-avatar">
-										@if(!empty($purchase->image))
-										<span class="avatar avatar-sm mr-2">
-											<img class="avatar-img" src="{{asset('storage/purchases/'.$purchase->image)}}" alt="product image">
-										</span>
-										@endif
-										{{$purchase->name}}
-									</h2>
-								</td>
-								<td>{{$purchase->category->name}}</td>
-								<td>{{AppSettings::get('app_currency', '$')}}{{$purchase->price}}</td>
-								<td>{{$purchase->quantity}}</td>
-								<td>{{$purchase->supplier->name}}</td>
-								<td>{{date_format(date_create($purchase->expiry_date),"d M, Y")}}</td>
-								<td>
-									<div class="actions">
-										<a class="btn btn-sm bg-success-light" href="{{route('edit-purchase',$purchase)}}">
-											<i class="fe fe-pencil"></i> Edit
-										</a>
-										<a data-id="{{$purchase->id}}" href="javascript:void(0);" class="btn btn-sm bg-danger-light deletebtn" data-toggle="modal">
-											<i class="fe fe-trash"></i> Delete
-										</a>
-									</div>
-								</td>
-							</tr>
-							@endforeach --}}
-							
+														
 						</tbody>
 					</table>
 				</div>
