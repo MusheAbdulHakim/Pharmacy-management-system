@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SaleController;
 use App\Http\Controllers\Admin\SupplierController;
 
 /*
@@ -49,6 +50,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::resource('products',ProductController::class)->except('show');
     Route::get('products/outstock',[ProductController::class,'outstock'])->name('outstock');
     Route::get('products/expired',[ProductController::class,'expired'])->name('expired');
+    Route::resource('sales',SaleController::class);
 
     Route::get('backup', [BackupController::class,'index'])->name('backup.index');
     Route::put('backup/create', [BackupController::class,'create'])->name('backup.store');
