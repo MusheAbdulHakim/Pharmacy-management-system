@@ -26,9 +26,14 @@
 	
 	<!-- Header Right Menu -->
 	<ul class="nav user-menu">
-
+		<li class="nav-item dropdown">
+			<a href="#" data-target="#add_sales" title="make a sale" data-toggle="modal" class="dropdown-toggle nav-link">
+				<i class="fas fa-clipboard"></i>
+			</a>
+		</li>
 		<!-- Notifications -->
 		<li class="nav-item dropdown noti-dropdown">
+			
 			<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
 				<i class="fe fe-bell"></i> <span class="badge badge-pill">{{auth()->user()->unReadNotifications->count()}}</span>
 			</a>
