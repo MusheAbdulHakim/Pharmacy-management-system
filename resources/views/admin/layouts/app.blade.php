@@ -66,7 +66,9 @@
                 @endif
 
                 @yield('content')
-
+                <!-- add sales modal-->
+                <x-modals.add-sale />
+                 <!-- / add sales modal -->
             </div>
         </div>
         <!-- /Page Wrapper -->
