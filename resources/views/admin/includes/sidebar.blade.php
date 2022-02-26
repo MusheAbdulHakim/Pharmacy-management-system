@@ -62,14 +62,15 @@
 				</li>
 				@endcan
 
-				{{-- @can('view-reports')
+				@can('view-reports')
 				<li class="submenu">
 					<a href="#"><i class="fe fe-document"></i> <span> Reports</span> <span class="menu-arrow"></span></a>
 					<ul style="display: none;">
-						<li><a class="{{ route_is('reports') ? 'active' : '' }}" href="{{route('reports')}}">Reports</a></li>
+						<li><a class="{{ route_is('sales.report') ? 'active' : '' }}" href="{{route('sales.report')}}">Sale Report</a></li>
+						<li><a class="{{ route_is('purchases.report') ? 'active' : '' }}" href="{{route('purchases.report')}}">Purchase Report</a></li>
 					</ul>
 				</li>
-				@endcan --}}
+				@endcan
 
 				@can('view-access-control')
 				<li class="submenu">
