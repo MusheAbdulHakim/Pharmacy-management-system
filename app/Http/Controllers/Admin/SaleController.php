@@ -8,6 +8,7 @@ use App\Models\Purchase;
 use Illuminate\Http\Request;
 use App\Events\PurchaseOutStock;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class SaleController extends Controller
@@ -72,7 +73,11 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'create sales';
+        $products = Product::get();
+        return view('admin.sales.create',compact(
+            'title','products'
+        ));
     }
 
     /**
@@ -123,7 +128,7 @@ class SaleController extends Controller
             
         }
 
-        return back()->with($notification);
+        return redirect()->route('sales.index')->with($notification);
     }
 
     
@@ -131,64 +136,101 @@ class SaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \app\Models\Sale $sale
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Sale $sale)
     {
-        //
+        $title = 'edit sale';
+        $products = Product::get();
+        return view('admin.sales.edit',compact(
+            'title','sale','products'
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \app\Models\Sale $sale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sale $sale)
     {
         $this->validate($request,[
             'product'=>'required',
-            'quantity'=>'required|integer'
+            'quantity'=>'required|integer|min:1'
         ]);
         $sold_product = Product::find($request->product);
-        
         /**
-         * update quantity of sold item frompurchases
+         * update quantity of sold item from purchases
         **/
         $purchased_item = Purchase::find($sold_product->purchase->id);
-        $new_quantity = ($purchased_item->quantity) - ($request->quantity);
-        if ($new_quantity > 0){
+        if(!empty($request->quantity)){
+            $new_quantity = ($purchased_item->quantity) - ($request->quantity);
+        }
+        $new_quantity = $sale->quantity;
+        $notification = '';
+        if (!($new_quantity < 0)){
             $purchased_item->update([
                 'quantity'=>$new_quantity,
             ]);
+
             /**
              * calcualting item's total price
             **/
-            $total_price = ($request->quantity) * ($sold_product->price);
-            Sale::create([
+            if(!empty($request->quantity)){
+                $total_price = ($request->quantity) * ($sold_product->price);
+            }
+            $total_price = $sale->total_price;
+            $sale->update([
                 'product_id'=>$request->product,
                 'quantity'=>$request->quantity,
                 'total_price'=>$total_price,
             ]);
 
-            $notification = notify("Product has been sold");
-        }
-        
-        elseif($new_quantity <=3 && $new_quantity !=0){
+            $notification = notify("Product has been updated");
+        } 
+        if($new_quantity <=1 && $new_quantity !=0){
             // send notification 
-            $product = Purchase::where('quantity', '<=', 3)->first();
+            $product = Purchase::where('quantity', '<=', 1)->first();
             event(new PurchaseOutStock($product));
             // end of notification 
-            $notification =notify("Product is running out of stock!!!");
+            $notification = notify("Product is running out of stock!!!");
             
         }
-        else{
-            $notification = notify("Please check purchase product quantity");
-            return back()->with($notification);
-        }
+        return redirect()->route('sales.index')->with($notification);
     }
+
+    /**
+     * Generate sales reports index
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reports(Request $request){
+        $title = 'sales reports';
+        return view('admin.sales.reports',compact(
+            'title'
+        ));
+    }
+
+    /**
+     * Generate sales report form post
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function generateReport(Request $request){
+        $this->validate($request,[
+            'from_date' => 'required',
+            'to_date' => 'required',
+        ]);
+        $sales = Sale::whereBetween(DB::raw('DATE(created_at)'), array($request->from_date, $request->to_date))->get();
+        return view('admin.sales.reports',compact(
+            'sales'
+        ));
+    }
+
 
     /**
      * Remove the specified resource from storage.
