@@ -115,7 +115,41 @@
 @push('page-js')
 <script>
     $(document).ready(function(){
-        $('#purchase-table').DataTable();
+        $('#purchase-table').DataTable({
+            dom: 'Bfrtip',		
+            buttons: [
+                {
+                extend: 'collection',
+                text: 'Export Data',
+                buttons: [
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: "thead th:not(.action-btn)"
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: "thead th:not(.action-btn)"
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        exportOptions: {
+                            columns: "thead th:not(.action-btn)"
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: "thead th:not(.action-btn)"
+                        }
+                    }
+                ]
+                }
+            ]
+        });
     });
 </script>
 @endpush
