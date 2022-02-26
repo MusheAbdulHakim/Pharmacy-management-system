@@ -7,6 +7,7 @@ use App\Models\Purchase;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use QCod\AppSettings\Setting\AppSettings;
 
@@ -169,6 +170,23 @@ class PurchaseController extends Controller
         ]);
         $notifications = notify("Purchase has been updated");
         return redirect()->route('purchases.index')->with($notifications);
+    }
+
+    public function reports(){
+        $title ='purchase reports';
+        return view('admin.purchases.reports',compact('title'));
+    }
+
+    public function generateReport(Request $request){
+        $this->validate($request,[
+            'from_date' => 'required',
+            'to_date' => 'required'
+        ]);
+        $title = 'purchases reports';
+        $purchases = Purchase::whereBetween(DB::raw('DATE(created_at)'), array($request->from_date, $request->to_date))->get();
+        return view('admin.purchases.reports',compact(
+            'purchases','title'
+        ));
     }
 
     /**
