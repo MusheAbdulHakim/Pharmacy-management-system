@@ -17,11 +17,6 @@ return [
 
     'default' => env('BROADCAST_DRIVER', 'null'),
 
-    'options' => [
-        'cluster' => 'mt1',
-        'useTLS' => true
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Broadcast Connections

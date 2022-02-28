@@ -31,39 +31,11 @@ if(!function_exists('notify')){
     }
 }
 
-if(!function_exists('csvToArray')){
-    function csvToArray($filename = '', $delimiter = ','){
-        if (!file_exists($filename) || !is_readable($filename))
-            return false;
-
-        $header = null;
-        $data = array();
-        if (($handle = fopen($filename, 'r')) !== false){
-            while (($row = fgetcsv($handle, 1000, $delimiter)) !== false)
-            {
-                if (!$header)
-                    $header = $row;
-                else
-                    $data[] = array_combine($header, $row);
-            }
-            fclose($handle);
-        }
-
-        return $data;
-    }
-
-}
-
-
-if(!function_exists('importCsv')){
-    function importCsv($file, $model){
-        $modelArray = $this->csvToArray($file);
-    
-        for ($i = 0; $i < count($modelArray); $i ++)
-        {
-            $model::firstOrCreate($modelArray[$i]);
-        }
-        return $this->notify('csv data imported successfully');    
+if(!function_exists('alert')){
+    function alert($message , $type='success'){
+        return array(
+            'message'=> $message,
+            'alert-type' => $type,
+        );
     }
 }
-

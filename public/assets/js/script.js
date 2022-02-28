@@ -1,8 +1,10 @@
-/*
-Author       : Dreamguys
-Template Name: Doccure - Bootstrap Admin Template
-Version      : 1.3
-*/
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+});
 
 (function($) {
     "use strict";
@@ -12,13 +14,19 @@ Version      : 1.3
 	var $wrapper = $('.main-wrapper');
 	var $pageWrapper = $('.page-wrapper');
 	var $slimScrolls = $('.slimscroll');
+
+	// alert
+	$("div.alert").delay(3000).slideUp(750);
 	
 	// Sidebar
-	
 	var Sidemenu = function() {
 		this.$menuItem = $('#sidebar-menu a');
 	};
-	
+	// select2
+	$('.select2').select2({
+		placeholder: 'Select an option'
+	});
+		
 	function init() {
 		var $this = Sidemenu;
 		$('#sidebar-menu a').on('click', function(e) {
@@ -136,16 +144,7 @@ Version      : 1.3
 		$(this).find('i.fa').toggleClass('fa-star').toggleClass('fa-star-o');
 	});
 	
-	// Summernote
 	
-	if($('.summernote').length > 0) {
-		$('.summernote').summernote({
-			height: 200,                 // set editor height
-			minHeight: null,             // set minimum height of editor
-			maxHeight: null,             // set maximum height of editor
-			focus: false                 // set focus to editable area after initializing summernote
-		});
-	}
 	
     // Product thumb images
 
