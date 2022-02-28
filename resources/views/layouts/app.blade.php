@@ -26,9 +26,7 @@
 		<link rel="stylesheet" href="{{asset('assets/plugins/snackbar/snackbar.min.css')}}">
 		<!-- Toastr CSS -->
 		<link rel="stylesheet" href="{{asset('assets/plugins/toastr/toastr.css')}}">
-		<!-- Datatables css -->
-		<link rel="stylesheet" href="{{asset('assets/plugins/DataTables/datatables.css')}}">
-
+		
 		<!-- Main CSS -->
 		<link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
@@ -106,7 +104,6 @@
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/script.js')}}"></script>
 	<script src="{{asset('js/app.js')}}"></script>
-	{{-- <script src="{{asset('assets/js/datatables-customizer.js')}}"></script> --}}
 
 	<script>
 		$(document).ready(function() {
