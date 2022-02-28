@@ -14,7 +14,9 @@ class PurchaseOutStock
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+
     public $data;
+
     /**
      * Create a new event instance.
      *

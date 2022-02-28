@@ -18,10 +18,6 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        'App\Events\PurchaseOutStock'=>[
-            'App\Listeners\NotifyStockAlert',
-        ],
-        
     ];
 
     /**
@@ -31,9 +27,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Event::list(function (PodcastProcessed $event){
-        //     $product = Product::where('quantity', '<=', 3)->first();
-        //     auth()->user()->notify(new ProductAlert($product));
-        // });
+        //
     }
 }

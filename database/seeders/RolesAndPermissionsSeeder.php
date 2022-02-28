@@ -21,18 +21,16 @@ class RolesAndPermissionsSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         //create permissions
-
-
         $arrayOfPermissionNames = [
-          'view-sales', 'create-sales','destroy-sale','update-sales',
-          'view-reports','view-category','create-category','destroy-category','update-category',
-          'view-products','create-product','update-product','destroy-product',
-          'view-purchase','create-purchase','update-purchase','destroy-purchase',
-          'view-supplier','create-supplier','update-supplier','destroy-supplier',
-          'view-users','create-user','update-user','destroy-user',
+          'view-sales', 'create-sale','destroy-sale','edit-sale',
+          'view-reports','view-category','create-category','destroy-category','edit-category',
+          'view-products','create-product','edit-product','destroy-product',
+          'view-purchase','create-purchase','edit-purchase','destroy-purchase',
+          'view-supplier','create-supplier','edit-supplier','destroy-supplier',
+          'view-users','create-user','edit-user','destroy-user',
           'view-access-control',
-          'view-role','update-role','destroy-role','create-role',
-          'view-permission','create-permission','update-permission','destroy-permission',
+          'view-role','edit-role','destroy-role','create-role',
+          'view-permission','create-permission','edit-permission','destroy-permission',
           'view-expired-products','view-outstock-products','backup-app','backup-db','view-settings',
 
         ];
@@ -44,7 +42,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // create roles and assign permissions
         $role = Role::create(['name' => 'sales-person'])
-         ->givePermissionTo(['view-sales', 'view-reports','create-sales']);
+         ->givePermissionTo(['view-sales', 'view-reports','create-sale']);
         $role = Role::create(['name' => 'super-admin']);
         $role->givePermissionTo(Permission::all());
     }

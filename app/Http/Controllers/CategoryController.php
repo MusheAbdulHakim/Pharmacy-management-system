@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CategoryController extends Controller
 {
@@ -12,12 +13,34 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = "categories";
-        $categories = Category::get();
+        if($request->ajax()){
+            $categories = Category::get();
+            return DataTables::of($categories)
+                    ->addIndexColumn()
+                    ->addColumn('created_at',function($category){
+                        return date_format(date_create($category->created_at),"d M,Y");
+                    })
+                    ->addColumn('action',function ($row){
+                        $editbtn = '<a data-id="'.$row->id.'" data-name="'.$row->name.'" href="javascript:void(0)" class="editbtn"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>';
+                        $deletebtn = '<a data-id="'.$row->id.'" data-route="'.route('categories').'" href="javascript:void(0)" id="deletebtn"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>';
+                        if(!auth()->user()->hasPermissionTo('update-category')){
+                            $editbtn = '';
+                        }
+                        if(!auth()->user()->hasPermissionTo('destroy-category')){
+                            $deletebtn = '';
+                        }
+                        $btn = $editbtn.' '.$deletebtn;
+                        return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+        // $categories = Category::get();
         return view('categories',compact(
-            'title','categories',
+            'title',
         ));
     }
 

@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use App\Models\User;
 use App\Events\PurchaseOutStock;
-use App\Notifications\StockAlert;
+use App\Notifications\StockAlertNotification;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -23,14 +23,14 @@ class NotifyStockAlert
     /**
      * Handle the event.
      *
-     * @param  PurchaseOutStock  $event
+     * @param  object  $event
      * @return void
      */
     public function handle(PurchaseOutStock $event)
     {
         $users = User::get();
         foreach($users as $user){
-            $user->notify(new StockAlert($event->data));
+            $user->notify(new StockAlertNotification($event->data));
         }
     }
 }

@@ -58,27 +58,7 @@ return [
                 ],
             ]
         ],
-        'email' => [
-            'title' => 'Email Settings',
-            'descriptions' => '',
-            'icon' => 'fa fa-envelope',
-
-            'inputs' => [
-                [
-                    'name' => 'from_email',
-                    'type' => 'email',
-                    'label' => 'From Email',
-                    'placeholder' => 'Application from email',
-                    'rules' => 'required|email',
-                ],
-                [
-                    'name' => 'from_name',
-                    'type' => 'text',
-                    'label' => 'Email from Name',
-                    'placeholder' => 'Email from Name',
-                ]
-            ]
-        ]
+        
     ],
 
     // Setting page url, will be used for get and post request
@@ -89,7 +69,7 @@ return [
 
     // View settings
     // 'setting_page_view' => 'app_settings::settings_page',
-    'setting_page_view' => 'settings',
+    'setting_page_view' => 'admin.settings',
     'flash_partial' => 'app_settings::_flash',
 
     // Setting section class setting
@@ -113,7 +93,7 @@ return [
     'remove_abandoned_settings' => false,
 
     // Controller to show and handle save setting
-    'controller' => '\App\Http\Controllers\SettingController',
+    'controller' => '\App\Http\Controllers\Admin\SettingController',
 
     // settings group
     'setting_group' => function() {

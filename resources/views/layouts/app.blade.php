@@ -106,7 +106,7 @@
 	<!-- Custom JS -->
 	<script src="{{asset('assets/js/script.js')}}"></script>
 	<script src="{{asset('js/app.js')}}"></script>
-	<script src="{{asset('assets/js/datatables-customizer.js')}}"></script>
+	{{-- <script src="{{asset('assets/js/datatables-customizer.js')}}"></script> --}}
 
 	<script>
 		$(document).ready(function() {

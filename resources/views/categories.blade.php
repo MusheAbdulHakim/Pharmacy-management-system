@@ -35,7 +35,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@foreach ($categories as $category)
+							{{-- @foreach ($categories as $category)
 							<tr>								
 								<td>
 									<h2 class="table-avatar">	
@@ -56,7 +56,7 @@
 									</div>
 								</td>
 							</tr>
-							@endforeach							
+							@endforeach							 --}}
 						</tbody>
 					</table>
 				</div>
@@ -127,7 +127,7 @@
 <!-- /Edit Details Modal -->
 
 <!-- Delete Modal -->
-<x-modals.delete :route="'categories'" :title="'Category'" />
+{{-- <x-modals.delete :route="'categories'" :title="'Category'" /> --}}
 <!-- /Delete Modal -->
 @endsection
 
@@ -137,6 +137,16 @@
 	<script src="{{asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 	<script>
 		$(document).ready(function() {
+			var table = $('#category-table').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{route('categories')}}",
+                columns: [
+                    {data: 'name', name: 'name'},
+					{data: 'created_at',name: 'created_at'},
+                    {data: 'action', name: 'action', orderable: false, searchable: false},
+                ]
+            });
 			$('#category-table').on('click','.editbtn',function (){
 				event.preventDefault();
 				jQuery.noConflict();
