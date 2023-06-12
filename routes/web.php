@@ -29,7 +29,7 @@ use App\Http\Controllers\Admin\SupplierController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware(['auth'])->prefix('admin')->group(function(){
+Route::middleware(['auth'])->group(function(){
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
     Route::get('',[DashboardController::class,'Index']);
     Route::get('notification',[NotificationController::class,'markAsRead'])->name('mark-as-read');
@@ -64,8 +64,10 @@ Route::middleware(['auth'])->prefix('admin')->group(function(){
     Route::get('settings',[SettingController::class,'index'])->name('settings');
 });
 
-Route::middleware(['guest'])->prefix('admin')->group(function () {
-    Route::get('',[DashboardController::class,'Index']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('',function(){
+        return redirect()->route('dashboard');
+    });
 
     Route::get('login',[LoginController::class,'index'])->name('login');
     Route::post('login',[LoginController::class,'login']);
@@ -77,8 +79,4 @@ Route::middleware(['guest'])->prefix('admin')->group(function () {
     Route::post('forgot-password',[ForgotPasswordController::class,'requestEmail']);
     Route::get('reset-password/{token}',[ResetPasswordController::class,'index'])->name('password.reset');
     Route::post('reset-password',[ResetPasswordController::class,'resetPassword'])->name('password.update');
-});
-
-Route::get('/', function () {
-    return view('welcome');
 });
