@@ -241,7 +241,9 @@ class ProductController extends Controller
     public function outstock(Request $request){
         $title = "outstocked Products";
         if($request->ajax()){
-            $products = Purchase::where('quantity', '<=', 0)->get();
+            $products = Product::whereHas('purchase', function($q){
+                return $q->where('quantity', '<=', 0);
+            })->get();
             return DataTables::of($products)
                 ->addColumn('product',function($product){
                     $image = '';
@@ -255,7 +257,7 @@ class ProductController extends Controller
                         return $product->purchase->product. ' ' . $image;
                     }
                 })
-
+               
                 ->addColumn('category',function($product){
                     $category = null;
                     if(!empty($product->purchase->category)){
