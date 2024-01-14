@@ -34,9 +34,9 @@ class ProductController extends Controller
                             </span>';
                         }
                         return $product->purchase->product. ' ' . $image;
-                    }                 
+                    }
                 })
-                
+
                 ->addColumn('category',function($product){
                     $category = null;
                     if(!empty($product->purchase->category)){
@@ -44,7 +44,7 @@ class ProductController extends Controller
                     }
                     return $category;
                 })
-                ->addColumn('price',function($product){                   
+                ->addColumn('price',function($product){
                     return settings('app_currency','$').' '. $product->price;
                 })
                 ->addColumn('quantity',function($product){
@@ -76,7 +76,7 @@ class ProductController extends Controller
             'title'
         ));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -90,7 +90,7 @@ class ProductController extends Controller
         return view('admin.products.create',compact(
             'title','purchases'
         ));
-        
+
     }
 
     /**
@@ -121,7 +121,7 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with($notification);
     }
 
-    
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -152,7 +152,7 @@ class ProductController extends Controller
             'discount'=>'nullable',
             'description'=>'nullable|max:255',
         ]);
-        
+
         $price = $request->price;
         if($request->discount >0){
            $price = $request->discount * $request->price;
@@ -176,7 +176,7 @@ class ProductController extends Controller
     public function expired(Request $request){
         $title = "expired Products";
         if($request->ajax()){
-            $products = Purchase::whereDate('expiry_date', '=', Carbon::now())->get();
+            $products = Purchase::whereDate('expiry_date', '<=', Carbon::now())->get();
             return DataTables::of($products)
                 ->addColumn('product',function($product){
                     $image = '';
@@ -188,9 +188,9 @@ class ProductController extends Controller
                             </span>';
                         }
                         return $product->purchase->product. ' ' . $image;
-                    }                 
+                    }
                 })
-                
+
                 ->addColumn('category',function($product){
                     $category = null;
                     if(!empty($product->purchase->category)){
@@ -198,7 +198,7 @@ class ProductController extends Controller
                     }
                     return $category;
                 })
-                ->addColumn('price',function($product){                   
+                ->addColumn('price',function($product){
                     return settings('app_currency','$').' '. $product->price;
                 })
                 ->addColumn('quantity',function($product){
@@ -241,7 +241,9 @@ class ProductController extends Controller
     public function outstock(Request $request){
         $title = "outstocked Products";
         if($request->ajax()){
-            $products = Purchase::where('quantity', '<=', 0)->get();
+            $products = Product::whereHas('purchase', function($q){
+                return $q->where('quantity', '<=', 0);
+            })->get();
             return DataTables::of($products)
                 ->addColumn('product',function($product){
                     $image = '';
@@ -253,9 +255,9 @@ class ProductController extends Controller
                             </span>';
                         }
                         return $product->purchase->product. ' ' . $image;
-                    }                 
+                    }
                 })
-                
+               
                 ->addColumn('category',function($product){
                     $category = null;
                     if(!empty($product->purchase->category)){
@@ -263,7 +265,7 @@ class ProductController extends Controller
                     }
                     return $category;
                 })
-                ->addColumn('price',function($product){                   
+                ->addColumn('price',function($product){
                     return settings('app_currency','$').' '. $product->price;
                 })
                 ->addColumn('quantity',function($product){
@@ -291,7 +293,7 @@ class ProductController extends Controller
                 ->rawColumns(['product','action'])
                 ->make(true);
         }
-        $product = Purchase::where('quantity', '<=', 0)->first();        
+        $product = Purchase::where('quantity', '<=', 0)->first();
         return view('admin.products.outstock',compact(
             'title',
         ));
