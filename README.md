@@ -17,7 +17,11 @@
 13. Stock notifications
 
 # Installation
- Follow these steps to install the application.
+- Watch the installation process on youtube below.
+
+[![youtube thumbnail](https://img.youtube.com/vi/nhMaD6MhJzU/0.jpg)](https://www.youtube.com/watch?v=nhMaD6MhJzU) 
+
+ Or Follow these steps to install the application.
 1. Clone the Repository
 ```
 git clone https://github.com/MusheAbdulHakim/Pharmacy-management-system.git
